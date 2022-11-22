@@ -20,7 +20,7 @@ const useStyles = {
 function Navbar() {
   const [value, setValue] = useState(0);
   const [list, setList] = useState<DirAmenity[]>();
-  console.log(process.env.NEXT_PUBLIC_SERVER_URI)
+  // console.log(process.env.NEXT_PUBLIC_SERVER_URI)
   useEffect(()=>{
     const test = async()=>{
       // async function init(){
