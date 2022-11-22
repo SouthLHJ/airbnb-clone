@@ -1,0 +1,40 @@
+{
+  "name": "airbnb",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@googlemaps/react-wrapper": "^1.1.35",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.12",
+    "@react-google-maps/api": "^2.17.0",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/formidable": "^2.0.5",
+    "@types/next-auth": "^3.15.0",
+    "@types/node": "18.11.9",
+    "@types/react": "18.0.24",
+    "@types/react-dom": "18.0.8",
+    "bcryptjs": "^2.4.3",
+    "date-fns": "^2.29.3",
+    "firebase": "^9.14.0",
+    "formidable": "^2.0.1",
+    "google-map-react": "^2.2.0",
+    "mongoose": "^6.7.1",
+    "next": "13.0.1",
+    "next-auth": "^4.15.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.6.0",
+    "typescript": "4.8.4"
+  },
+  "devDependencies": {
+    "@types/google-map-react": "^2.1.7"
+  }
+}
