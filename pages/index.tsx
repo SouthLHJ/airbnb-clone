@@ -9,7 +9,7 @@ import MainPagePreviewItem from '../components/main/preview';
 
 export default function Home({items}:InferGetServerSidePropsType<typeof getServerSideProps>) {
   // const {data, status} = useSession();
-  console.log(items)
+  console.log(process.env.NEXT_PUBLIC_SERVER_URI)
 
   return (
     <Box sx={{display:"flex", flexWrap : "wrap", flexDirection :"row", padding : "24px"}}>
