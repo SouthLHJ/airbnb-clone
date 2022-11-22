@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
   export default function Home() {
   const [items, setItems] = useState<Accommodation[]>();
   // const {data, status} = useSession();
-  console.log(process.env.NEXT_PUBLIC_SERVER_URI)
+  // console.log(process.env.NEXT_PUBLIC_SERVER_URI)
     
 
   useEffect(()=>{
@@ -20,6 +20,7 @@ import { useEffect, useState } from 'react';
       const rcv = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/api/accommodation/list`,{method:"get"})
       const data = await rcv.json();
       setItems(data.datas)
+      console.log(data)
     }
     test();
   },[])
