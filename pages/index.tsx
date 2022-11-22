@@ -28,9 +28,14 @@ import { useEffect, useState } from 'react';
     <Box sx={{display:"flex", flexWrap : "wrap", flexDirection :"row", padding : "24px"}}>
       { items &&
         items.map(one=>{
-          return (
-            <MainPagePreviewItem item={one}/>
-          )
+          if(one.register){
+            return (
+              <MainPagePreviewItem item={one}/>
+            )
+          }else{
+            return null
+          }
+          
         })
       }
     </Box>
