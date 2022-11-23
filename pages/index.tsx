@@ -7,22 +7,15 @@ import { Accommodation } from '../interfaces/becomehost/accommodation';
 import styles from '../styles/Home.module.css'
 import MainPagePreviewItem from '../components/main/preview';
 import { useEffect, useState } from 'react';
+import { DirAmenity } from '../lib/models/dirAmenities';
+import { useDirAmenityDispatch } from '../contexts/amenities';
 
-// export default function Home({items}:InferGetServerSidePropsType<typeof getServerSideProps>) {
-  export default function Home() {
-  const [items, setItems] = useState<Accommodation[]>();
-  // const {data, status} = useSession();
-  // console.log(process.env.NEXT_PUBLIC_SERVER_URI)
-    
-
+export default function Home({items,dirAmenity}:InferGetServerSidePropsType<typeof getServerSideProps>) {
+  // export default function Home() {
+  // const [items, setItems] = useState<Accommodation[]>();
+  const dirDispatch = useDirAmenityDispatch();
   useEffect(()=>{
-    async function test (){
-      const rcv = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/api/accommodation/list`,{method:"get"})
-      const data = await rcv.json();
-      setItems(data.datas)
-      console.log(data)
-    }
-    test();
+    dirDispatch({type: "save", payload : dirAmenity})
   },[])
   return (
     <Box sx={{display:"flex", flexWrap : "wrap", flexDirection :"row", padding : "24px"}}>
@@ -47,15 +40,17 @@ import { useEffect, useState } from 'react';
 Home.layout = "L1";
 
 
-// export const getServerSideProps : GetServerSideProps<{items : Accommodation[]}> = async(context : GetServerSidePropsContext)=>{
+export const getServerSideProps : GetServerSideProps<{items : Accommodation[] , dirAmenity : DirAmenity[]}> = async(context : GetServerSidePropsContext)=>{
 
-//   const rcv = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/api/accommodation/list`,{method:"get"})
-//   const data = await rcv.json();
+  const rcv = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/api/accommodation/list`,{method:"get"})
+  const data = await rcv.json();
+  const rcvdir = await await fetch(process.env.NEXT_PUBLIC_SERVER_URI+"/api/dir/amenity",{method: "get"})
+  const datadir = await rcvdir.json();
 
-
-//   return {
-//     props :{
-//       items : data.datas
-//     }
-//   }
-// }
+  return {
+    props :{
+      items : data.datas,
+      dirAmenity : datadir.datas
+    }
+  }
+}

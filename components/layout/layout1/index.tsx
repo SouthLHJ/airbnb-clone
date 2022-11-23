@@ -6,10 +6,12 @@ import React, { ReactNode } from "react";
 import Footer from "./footer";
 import Header from "./header";
 import Navbar from "./navbar";
+import { DirAmenityProvider } from "../../../contexts/amenities";
 //https://mui.com/material-ui/react-app-bar/
 function Layout1({children} : {children:ReactNode}) {
     return ( 
-    <>
+    <>  
+        <DirAmenityProvider>
         <AppBar position="sticky" sx={{ top: 0, bottom: 'auto', boxShadow :0, bgcolor:'white', color: 'text.primary' }}>
             <header>
             <Toolbar>
@@ -33,6 +35,7 @@ function Layout1({children} : {children:ReactNode}) {
         <footer>
             <Footer/>
         </footer>
+        </DirAmenityProvider>
         
     </> );
 }

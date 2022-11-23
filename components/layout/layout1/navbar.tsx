@@ -4,6 +4,7 @@ import TuneIcon from '@mui/icons-material/Tune';
 import {useState,useEffect} from "react"
 import { CustomColor } from '../../../interfaces/setting/color';
 import { DirAmenity } from '../../../lib/models/dirAmenities';
+import { useDirAmenityState } from '../../../contexts/amenities';
 
 const useStyles = {
     customStyleOnTab: {
@@ -20,22 +21,23 @@ const useStyles = {
 function Navbar() {
   const [value, setValue] = useState(0);
   const [list, setList] = useState<DirAmenity[]>();
+  const dirAmenity = useDirAmenityState();
   // console.log(process.env.NEXT_PUBLIC_SERVER_URI)
   useEffect(()=>{
-    const test = async()=>{
-      // async function init(){
-        const rcv = await fetch(process.env.NEXT_PUBLIC_SERVER_URI+"/api/dir/amenity",{
-          method: "get",
-        })
-        const rst = await rcv.json();
-        // console.log(rst)
-        if(rst.result){
-          setList( rst.datas);
-        }
-      // };
-      // init();
-    }
-    test();
+    // const test = async()=>{
+    //   // async function init(){
+    //     const rcv = await fetch(process.env.NEXT_PUBLIC_SERVER_URI+"/api/dir/amenity",{
+    //       method: "get",
+    //     })
+    //     const rst = await rcv.json();
+    //     // console.log(rst)
+    //     if(rst.result){
+    //       setList( rst.datas);
+    //     }
+    //   // };
+    //   // init();
+    // }
+    // test();
   },[])
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -80,7 +82,7 @@ function Navbar() {
                     style={{color : value ===0 ? CustomColor.black : "gray"}}
                      />
                   {
-                    list?.map(one=>{
+                    dirAmenity?.map(one=>{
                       return(
                         <Tab
                           icon={<img src={`/amenities/${one.amenitiy}.png`} style={{width : "20px", height :"20px"}}/>}
