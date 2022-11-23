@@ -17,7 +17,7 @@ function RoomsHeader() {
                 <Typography sx={textSt}>별점</Typography>
                 <Typography sx={textSt}>후기 : ~개</Typography>
                 <Typography sx={textSt}>호스트</Typography>
-                <Typography sx={textSt}>{ctx?.item.location?.street},{ctx?.item.location?.state},{ctx?.item.location?.countrycode}</Typography>
+                <Typography sx={textSt}>{ctx?.item.location?.city},{ctx?.item.location?.state},{ctx?.item.location?.countrycode}</Typography>
             </Box>
 
             <Box sx={{display :"flex", alignItems : "flex-end",}}>

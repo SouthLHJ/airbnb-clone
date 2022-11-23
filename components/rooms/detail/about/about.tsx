@@ -6,6 +6,7 @@ import RoomAboutTitle from "./title";
 import RoomAboutSummarize from "./summarize";
 import RoomAboutDescription from "./description";
 import RoomAboutAmenities from "./amenities";
+import RoomAboutCalender from "./calender";
 
 const displayRow = {display: "flex", flexDirection : "row"};
 const displayColumn = {display: "flex", flexDirection : "column"};
@@ -37,6 +38,12 @@ function RoomAbout() {
           </Box>
 
           <RoomAboutAmenities/>
+
+          <Box sx={{mt : "24px", mb : "24px"}}>
+            <Divider/>
+          </Box>
+
+          <RoomAboutCalender/>
 
       </Box>
     );

@@ -1,13 +1,14 @@
 import {Box, Typography} from "@mui/material"
 import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { Accommodation } from "../../../interfaces/becomehost/accommodation";
-import {createContext, useEffect, useRef}from "react"
+import {createContext, useEffect, useRef, useContext}from "react"
 import RoomsHeader from "../../../components/rooms/header/rmHeader";
 import RoomPhoto from "../../../components/rooms/photo/rmPhoto";
 import RoomDetail from "../../../components/rooms/detail/rmDetail";
 
 import { DirAmenity } from "../../../lib/models/dirAmenities";
-import { useDirAmenityDispatch } from "../../../contexts/amenities";
+import { useDirAmenityDispatch, useDirAmenityState } from "../../../contexts/amenities";
+import { AppContext } from "../../_app";
 
 
 export const RoomContext = createContext<{
@@ -16,13 +17,19 @@ export const RoomContext = createContext<{
 
 function RoomsIndex({item,dir}:InferGetServerSidePropsType<typeof getServerSideProps>) {
     const itemRef = useRef<Accommodation>(item);
-
+    const loading = useContext(AppContext);
     const dirDispatch = useDirAmenityDispatch();
-    
+    const dirstate = useDirAmenityState();
     useEffect(()=>{
+        console.log(dirstate)
+        if(!dirstate){
+            loading?.ready();
+        }else{
+            loading?.done();
+        }
         dirDispatch({type:"save",payload : dir})
-    },[])
 
+    },[dirstate])
 
     return (
     <RoomContext.Provider value={{item : itemRef.current}}>
@@ -60,9 +67,9 @@ export const getServerSideProps : GetServerSideProps<{item : Accommodation, dir 
         }
     })
     const rst = await rcv.json();
-    const rcvdir = await await fetch(process.env.NEXT_PUBLIC_SERVER_URI+"/api/dir/amenity",{method: "get"})
+    const rcvdir = await fetch(process.env.NEXT_PUBLIC_SERVER_URI+"/api/dir/amenity",{method: "get"})
     const datadir = await rcvdir.json();
-    
+    // console.log(datadir)
     return {
         props : {
             item : rst.datas,

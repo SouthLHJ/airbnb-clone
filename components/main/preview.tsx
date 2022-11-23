@@ -23,13 +23,23 @@ function MainPagePreviewItem({item}:Props) {
     return (
     <Box sx={{width:"300px",height :"350px",borderRadius : 2, boxShadow : "0 6px 16px rgba(0,0,0,0.12)", padding : 2, animation : "fadein 1s", cursor : "pointer"}}
         onClick={()=>onDetail()}
-        onPointerEnter={()=>{arrowL?.current?.style.setProperty("display","flex");arrowR?.current?.style.setProperty("display","flex")}}
-        onPointerLeave={()=>{arrowL?.current?.style.setProperty("display","none");arrowR?.current?.style.setProperty("display","none")}}
+        onPointerEnter={()=>{
+            if(imgNum>0){
+                arrowL?.current?.style.setProperty("display","flex");
+            }
+            if(imgNum<5){
+                arrowR?.current?.style.setProperty("display","flex")
+            }
+        }}
+        onPointerLeave={()=>{
+            arrowL?.current?.style.setProperty("display","none");
+            arrowR?.current?.style.setProperty("display","none")
+        }}
     >
         <Box sx={[{width : "100%", height : "250px", display : "flex", alignItems :"center", justifyContent :"center", position : "relative"}]}>
             <Box sx={[{position :"absolute",  left : 10, display : "none", width : "30px", height :"30px", borderRadius : 10, backgroundColor : "rgba(255,255,255,0.8)", zIndex : 10000, justifyContent : "center", alignItems : "center"}]}
                 ref={arrowL}
-                onClick={()=>{
+                onMouseDown={()=>{
                     if(imgNum === 0 ){
                         setImgNum(0)
                     }else{
@@ -54,7 +64,7 @@ function MainPagePreviewItem({item}:Props) {
             />
             <Box sx={[{position :"absolute",  right : 10, display : "none", width : "30px", height :"30px", borderRadius : 10, backgroundColor : "rgba(255,255,255,0.8)", zIndex : 10000, justifyContent : "center", alignItems : "center"}]}
                 ref={arrowR}
-                onClick={()=>{
+                onMouseDown={()=>{
                     if(imgNum === 5 ){
                         setImgNum(5)
                     }else{
