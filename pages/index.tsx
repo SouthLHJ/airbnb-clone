@@ -18,7 +18,7 @@ export default function Home({items,dirAmenity}:InferGetServerSidePropsType<type
     dirDispatch({type: "save", payload : dirAmenity})
   },[])
   return (
-    <Box sx={{display:"flex", flexWrap : "wrap", flexDirection :"row", padding : "24px"}}>
+    <Box sx={{display:"flex", flexWrap : "wrap", flexDirection :"row", padding : "24px", gap : "10px"}}>
       { items &&
         items.map(one=>{
           if(one.register){

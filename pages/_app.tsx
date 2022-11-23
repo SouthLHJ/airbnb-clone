@@ -1,34 +1,52 @@
-//import { Box, Container, IconButton, Menu ,MenuItem ,Avatar ,Divider ,ListItemIcon, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText, TextField, Slide, Button } from "@mui/material"; 
+import { Backdrop,CircularProgress } from "@mui/material"; 
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 import { AccountProvider } from '../contexts/account';
-import Layout1 from '../components/layout/layout1';
-import Layout2 from '../components/layout/layout2';
-import { NextPageContext } from 'next';
-import {ReactNode} from "react"
+import MainLayout from '../components/layout/layout1';
+import BecomeHostLayout from '../components/layout/layout2';
+import {ReactNode, createContext, useState} from "react"
+import RoomsLayout from '../components/layout/layout3';
 
 const layouts : keyvalue = {
-  "L1": Layout1 ,
-  "L2": Layout2,
+  "L1": MainLayout ,
+  "L2": BecomeHostLayout,
+  "L3": RoomsLayout,
 };
 
 type keyvalue = {
   [key : string] : ({ children }: { children: ReactNode}) =>JSX.Element
 }
 
+export const AppContext = createContext<{
+  ready: () => void;
+  done: () => void;
+} | null>(null);
+
 export default function App({ Component, pageProps : { session, ...pageProps }  }: AppProps & {Component : {layout : string}}) {
   // console.log("App",Component);
   // console.log("Layouts", layouts[Component.layout])
   const Layout  = layouts[Component.layout ?? "L1"];
-
+  
+  const [loading, setLoading] = useState<boolean>(false);
+    const ready = () => {
+      setLoading(true);
+    };
+    const done = () => {
+      setLoading(false);
+    };
   return(
     <> 
     <SessionProvider>
     <AccountProvider>
+    <AppContext.Provider value={{ready,done}}>
       <Layout>
         <Component {...pageProps} />
       </Layout>
+      <Backdrop open={loading} sx={{ color: "#fff", zIndex: 9999999 }}>
+        <CircularProgress color="info" />
+      </Backdrop>
+    </AppContext.Provider>
     </AccountProvider>
     </SessionProvider>
     </>

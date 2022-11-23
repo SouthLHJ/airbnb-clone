@@ -1,7 +1,7 @@
 //icon
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home';
+import {SiAirbnb} from "react-icons/si"
 //module
 import React, { ChangeEventHandler, MouseEventHandler, useRef, useState ,useContext, useEffect} from "react";
 import { Box,  IconButton} from "@mui/material";
@@ -38,7 +38,7 @@ export default function Header (){
     
     useEffect(()=>{
 
-        console.log(social)
+        // console.log(social)
         if(social){
             setRegisterDialog(true);
         }
@@ -69,7 +69,7 @@ export default function Header (){
             <Box sx={{display : "flex" , flexDirection : "row", width  :"100%", alignItems :"center"}}>
                 <Box sx={{width : "35%"}}>
                     <IconButton sx={{color : CustomColor.main}}>
-                        <HomeIcon/>
+                    <SiAirbnb />
                     </IconButton>
                 </Box>
                 <Box sx={{width : "35%", textAlign : "center"}}>

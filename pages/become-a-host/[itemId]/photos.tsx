@@ -33,7 +33,9 @@ function Photos({item}: InferGetServerSidePropsType<typeof getServerSideProps>) 
     //func
     const onNextPage = async()=>{
         // console.log(urls, photo)
-        
+        if((photo.length + urls.change.length)<5){
+            return;
+        }
         const dltrst = await deleteFiles();
         // console.log(dltrst);
         if(dltrst.result){

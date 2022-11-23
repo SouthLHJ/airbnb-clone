@@ -8,7 +8,7 @@ import Header from "./header";
 import Navbar from "./navbar";
 import { DirAmenityProvider } from "../../../contexts/amenities";
 //https://mui.com/material-ui/react-app-bar/
-function Layout1({children} : {children:ReactNode}) {
+function MainLayout({children} : {children:ReactNode}) {
     return ( 
     <>  
         <DirAmenityProvider>
@@ -40,4 +40,4 @@ function Layout1({children} : {children:ReactNode}) {
     </> );
 }
 
-export default Layout1;
+export default MainLayout;

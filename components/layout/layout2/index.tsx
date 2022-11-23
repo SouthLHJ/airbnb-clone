@@ -13,7 +13,7 @@ type Props = {
 
 
 
-function Layout2({children }: Props) {
+function BecomeHostLayout({children }: Props) {
     return (
         <AccommodationProvider>
         <PhotosProvider>
@@ -25,5 +25,5 @@ function Layout2({children }: Props) {
     )
 }
 
-export default Layout2;
+export default BecomeHostLayout;
 
