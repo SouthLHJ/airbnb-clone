@@ -30,7 +30,7 @@ function RoomsLayout({children }: Props) {
     <DirAmenityProvider>
 
         <Box sx={{pl : "50px", pr :"50px"}}>
-            <Box sx={{display : "flex" , flexDirection : "row", width  :"100%", alignItems :"center", mt : "24px"}}>
+            <Box sx={{display : "flex" , flexDirection : "row", width  :"100%", alignItems :"center", pb : "24px", borderBottomStyle : "solid",borderBottomWidth : "0.2px",borderBottomColor : CustomColor.blackHover ,mt : "24px"}}>
                     <Box sx={{width : "35%"}}>
                         <IconButton sx={{color : CustomColor.main}}>
                         <SiAirbnb />
