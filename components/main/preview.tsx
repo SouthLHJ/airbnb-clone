@@ -1,7 +1,6 @@
 import {Box, Typography} from "@mui/material"
 import { Accommodation } from "../../interfaces/becomehost/accommodation";
 import { CustomColor } from "../../interfaces/setting/color";
-import {FaWonSign} from "react-icons/fa"
 import {BsDot}from "react-icons/bs"
 import { useRouter } from "next/router";
 import {useRef, useState} from "react"
@@ -28,7 +27,7 @@ function MainPagePreviewItem({item}:Props) {
             if(imgNum>0){
                 arrowL?.current?.style.setProperty("display","flex");
             }
-            if(imgNum<5){
+            if(imgNum<4){
                 arrowR?.current?.style.setProperty("display","flex")
             }
         }}
@@ -79,18 +78,18 @@ function MainPagePreviewItem({item}:Props) {
             </Box>
 
             <Box sx={{position : "absolute", bottom : 10, display:"flex"}}>
-                <Typography fontSize={"20px"} color={CustomColor.white}>●</Typography>
-                <Typography fontSize={"20px"} color={"rgba(225,225,225,0.8)"}>●</Typography>
-                <Typography fontSize={"20px"} color={"rgba(225,225,225,0.8)"}>●</Typography>
-                <Typography fontSize={"20px"} color={"rgba(225,225,225,0.8)"}>●</Typography>
-                <Typography fontSize={"20px"} color={"rgba(225,225,225,0.8)"}>●</Typography>
+                <Typography fontSize={"20px"} color={imgNum===0 ? CustomColor.white : whitehover}>●</Typography>
+                <Typography fontSize={"20px"} color={imgNum===1 ? CustomColor.white : whitehover}>●</Typography>
+                <Typography fontSize={"20px"} color={imgNum===2 ? CustomColor.white : whitehover}>●</Typography>
+                <Typography fontSize={"20px"} color={imgNum===3 ? CustomColor.white : whitehover}>●</Typography>
+                <Typography fontSize={"20px"} color={imgNum===4 ? CustomColor.white : whitehover}>●</Typography>
             </Box>
 
         </Box>
         <Box sx={{display : "flex",mt : 1}}>
             <Box flex={1} >
                 <Typography>{item?.title}</Typography>
-                <Typography sx={{display:"flex", alignItems : "center"}}><FaWonSign/>{item?.price} / 박</Typography>
+                <Typography sx={{display:"flex", alignItems : "center"}}>￦{item?.price} / 박</Typography>
             </Box>
             <Box>
                 <Typography>신규 ★</Typography>
@@ -101,3 +100,6 @@ function MainPagePreviewItem({item}:Props) {
 }
 
 export default MainPagePreviewItem;
+
+//css
+const whitehover ="rgba(225,225,225,0.8)"

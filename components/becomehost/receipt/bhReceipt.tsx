@@ -2,7 +2,6 @@ import { Box, Button, Typography ,InputAdornment} from "@mui/material";
 import {Dispatch,SetStateAction,useEffect,useState} from "react"
 import { CustomColor } from "../../../interfaces/setting/color";
 import {HiPlus, HiMinus} from "react-icons/hi"
-import {FaWonSign} from "react-icons/fa"
 import ReceiptPreview from "./preview";
 import ReceiptStep from "./nextStep";
 import ReceiptDialog from "./previewDialog";

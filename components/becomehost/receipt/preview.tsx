@@ -1,7 +1,6 @@
 import { useAccommodationState } from "../../../contexts/accommodation";
 import { Box, Button, Typography ,InputAdornment} from "@mui/material";
 import { CustomColor } from "../../../interfaces/setting/color";
-import {FaWonSign} from "react-icons/fa"
 function ReceiptPreview() {
     const accommodation = useAccommodationState();
 
@@ -27,7 +26,7 @@ function ReceiptPreview() {
         <Box sx={{display : "flex",mt : 1}}>
             <Box flex={1}>
                 <Typography>{accommodation?.title}</Typography>
-                <Typography><FaWonSign/>{accommodation?.price} / 박</Typography>
+                <Typography>￦{accommodation?.price} / 박</Typography>
             </Box>
             <Box>
                 <Typography>신규 ★</Typography>

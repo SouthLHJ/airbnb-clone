@@ -1,11 +1,11 @@
 import { Box, Typography,Button } from "@mui/material";
 import { useContext } from "react";
 import { RecommandDateContext, RoomContext } from "../../../../pages/rooms/[itemId]";
-import {FaWonSign} from "react-icons/fa"
 import { CustomColor } from "../../../../interfaces/setting/color";
 import { format } from "date-fns";
 import RoomBookBoxTitle from "./boxtitle";
 import RoomBookBoxDate from "./boxdate";
+import RoomBookBoxPrice from "./price";
 
 const textSt = {ml : 1, mr : 1}
 
@@ -33,6 +33,12 @@ function RoomBookBox() {
         <RoomBookBoxTitle/>
 
         <RoomBookBoxDate/>
+
+        <Box sx={{display : "flex", justifyContent :"center" , width : "100%", mb : "24px"}}>
+            <Typography  sx={boxtextC}>예약 확정 전에는 요금이 청구되지 않습니다.</Typography>
+        </Box>
+
+        <RoomBookBoxPrice/>
 
         <Box sx={{width :"100%"}}>
             <Button onClick={()=>{}} sx={{width :"100%",backgroundImage:`linear-gradient(90deg,${CustomColor.mainHover}, ${CustomColor.main})`}}>

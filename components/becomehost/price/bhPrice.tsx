@@ -2,7 +2,6 @@ import { Box, Button, Typography ,InputAdornment} from "@mui/material";
 import {Dispatch,SetStateAction,useEffect,useState} from "react"
 import { CustomColor } from "../../../interfaces/setting/color";
 import {HiPlus, HiMinus} from "react-icons/hi"
-import {FaWonSign} from "react-icons/fa"
 
 
 import * as React from "react";
@@ -65,7 +64,7 @@ function BecomeHostPrice({price,setPrice}:Props) {
                 InputProps={{
                     startAdornment: (
                     <InputAdornment position="start">
-                        <FaWonSign/>
+                        <Typography>￦</Typography>
                     </InputAdornment>
                     ),
                 }}

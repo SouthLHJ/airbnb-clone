@@ -49,7 +49,7 @@ function RoomAboutCalender() {
 
     return (
         <>  
-            <Box sx={{display : "flex", flexDirection :"column"}}>
+            <Box sx={{display : "flex", flexDirection :"column", width : "50%"}}>
                 { title }
                 <Box sx={{display : "flex", flexDirection :"row"}}>
                     <Typography  fontSize={"13px"} color={"gray"}>{getYear(date[0] as any)}년 {getMonth(date[0] as any)}월 {getDate(date[0] as any)}일</Typography>
@@ -95,6 +95,10 @@ const DatePickerWrap = styled((props: StaticDateRangePickerProps<typeof dateFns,
     },
     '& .css-3pa7bi-MuiDateRangePickerViewDesktop-container:not(:last-of-type)': {
         borderRight: 'none'
+    },
+    "& .css-10wpov9-MuiTypography-root" :{
+        fontWeight : "bold",
+        // color : "red"
     }
 }))
 const DateRangePickerDay = styled(MuiDateRangePickerDay)(
@@ -108,7 +112,7 @@ const DateRangePickerDay = styled(MuiDateRangePickerDay)(
     ...(!outsideCurrentMonth &&
       isHighlighting && {
         borderRadius: 0,
-        backgroundColor: CustomColor.whiteHover,
+        backgroundColor: "rgba(0,0,0,0.1)",
         // color: "salmon",
         '&:hover, &:focus': {
           backgroundColor: CustomColor.whiteHover,
@@ -125,8 +129,12 @@ const DateRangePickerDay = styled(MuiDateRangePickerDay)(
       borderTopRightRadius: '50%',
       borderBottomRightRadius: '50%',
     }),
-    "& .css-pgdzhj-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected, & .css-pgdzhj-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected:hover, & .css-pgdzhj-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected:focus" : {
+    "& .MuiDateRangePickerDay-day.Mui-selected, & .MuiDateRangePickerDay-day.Mui-selected:hover, & .MuiDateRangePickerDay-day.Mui-selected:focus" : {
         backgroundColor : "black"
+    },
+    "& .css-l5pdik-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day:hover, & .MuiDateRangePickerDay-notSelectedDate MuiDateRangePickerDay-dayInsideRangeInterval" :{
+        // backgroundColor : CustomColor.blackHover,
+        boxShadow: "0 0 0 0.5px #000 inset"
     },
     "& .css-jwafdq-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected, & .css-jwafdq-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected:hover, & .css-jwafdq-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected:focus" : {
         backgroundColor : "black"

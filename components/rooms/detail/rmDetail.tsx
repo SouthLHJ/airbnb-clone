@@ -10,10 +10,10 @@ function RoomDetail() {
 
     return (
     <Box flex={1} sx={{display : "flex", flexDirection: "row"}}>
-        <Box sx={{width : "65%", mr : "20px"}}>
+        <Box flex={1} sx={{mr : "20px"}}>
             <RoomAbout />
         </Box>
-        <Box flex={1} sx={{display :"flex", alignItems : "flex-end", justifyContent : "space-between"}}>
+        <Box sx={{display :"flex", alignItems : "flex-end", justifyContent : "space-between", width : "400px"}}>
            <RoomBook/>
         </Box>
     </Box>
