@@ -1,10 +1,10 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import { useContext, useRef } from "react";
-import { RoomContext } from "../../../../pages/rooms/[itemId]";
 import {BsKey,BsCalendarDate}from "react-icons/bs"
 import {IoMedalOutline}from "react-icons/io5"
 import { CustomColor } from "../../../../interfaces/setting/color";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { RoomContext } from "../../../../contexts/rooms";
 
 
 const displayRow = {display: "flex", flexDirection : "row"};

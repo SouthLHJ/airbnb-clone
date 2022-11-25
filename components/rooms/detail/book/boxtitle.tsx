@@ -1,6 +1,6 @@
 import { Box, Typography,Button } from "@mui/material";
 import { useContext } from "react";
-import { RecommandDateContext, RoomContext } from "../../../../pages/rooms/[itemId]";
+import { RecommandDateContext, RoomContext } from "../../../../contexts/rooms";
 
 const textSt = {ml : 1, mr : 1}
 

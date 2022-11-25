@@ -1,7 +1,7 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import { useContext } from "react";
-import { RoomContext } from "../../../../pages/rooms/[itemId]";
 import {BsDot}from "react-icons/bs"
+import { RoomContext } from "../../../../contexts/rooms";
 
 const displayRow = {display: "flex", flexDirection : "row"};
 const displayColumn = {display: "flex", flexDirection : "column"};

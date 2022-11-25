@@ -1,8 +1,8 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import React,{ useContext } from "react";
-import { RecommandDateContext, RoomContext } from "../../../../pages/rooms/[itemId]";
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
+import { RecommandDateContext, RoomContext } from "../../../../contexts/rooms";
 
 
 import { LocalizationProvider } from '@mui/x-date-pickers-pro';
@@ -62,6 +62,7 @@ function RoomAboutCalender() {
             >
             <DatePickerWrap
                 disablePast
+                disableHighlightToday
                 calendars={2}
                 displayStaticWrapperAs="desktop"
                 label="date range"
@@ -91,7 +92,7 @@ const DatePickerWrap = styled((props: StaticDateRangePickerProps<typeof dateFns,
     />
 ))(()=>({
     '& .css-xelq0e-MuiPickerStaticWrapper-content > div > div:first-of-type': {
-        opacity: '0 '
+        opacity: 0
     },
     '& .css-3pa7bi-MuiDateRangePickerViewDesktop-container:not(:last-of-type)': {
         borderRight: 'none'
@@ -142,5 +143,8 @@ const DateRangePickerDay = styled(MuiDateRangePickerDay)(
     "& .css-18fxmqw-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected, & .css-18fxmqw-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected:hover, & .css-18fxmqw-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day.Mui-selected:focus" : {
         backgroundColor : "black"
     },
+    "& .MuiDateRangePickerDay-day.Mui-disabled": {
+        textDecoration: "line-through"
+    }
   }),
 ) as React.ComponentType<DateRangePickerDayProps<dateFns>>;

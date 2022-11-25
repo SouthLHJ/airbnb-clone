@@ -3,20 +3,23 @@ import { Accommodation } from "../../interfaces/becomehost/accommodation";
 import { CustomColor } from "../../interfaces/setting/color";
 import {BsDot}from "react-icons/bs"
 import { useRouter } from "next/router";
-import {useRef, useState} from "react"
+import {useContext, useRef, useState} from "react"
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { AppContext } from "../../pages/_app";
 type Props = {
     item : Accommodation
 }
 
 function MainPagePreviewItem({item}:Props) {
+    const loading = useContext(AppContext);
     const [imgNum, setImgNum] = useState<number>(0);
     const arrowL = useRef<HTMLElement>();
     const arrowR = useRef<HTMLElement>();
     const router = useRouter();
     //func
     const onDetail = ()=>{
+        loading?.ready();
         router.push(`/rooms/${item._id}`)
     }   
     // console.log(imgNum);
@@ -89,7 +92,7 @@ function MainPagePreviewItem({item}:Props) {
         <Box sx={{display : "flex",mt : 1}}>
             <Box flex={1} >
                 <Typography>{item?.title}</Typography>
-                <Typography sx={{display:"flex", alignItems : "center"}}>￦{item?.price} / 박</Typography>
+                <Typography sx={{display:"flex", alignItems : "center"}}>￦{item?.price?.toLocaleString()} / 박</Typography>
             </Box>
             <Box>
                 <Typography>신규 ★</Typography>

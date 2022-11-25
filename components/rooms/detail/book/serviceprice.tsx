@@ -2,15 +2,16 @@ import  dateFns,{differenceInDays,getYear,getMonth,getDate, addDays, format}  fr
 import { Box, Typography,Button, IconButton ,Divider} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { useContext ,useState ,Dispatch,SetStateAction } from "react";
-import { RecommandDateContext, RoomContext } from '../../../../pages/rooms/[itemId]';
+import { RecommandDateContext, RoomContext } from "../../../../contexts/rooms";
 
 type Props = {
     open : boolean,
     onClose: Dispatch<SetStateAction<boolean>>,
-    bottom : number
+    bottom : number,
+    right  : number | undefined,
 }
 const textSt = {fontSize:"16px"}
-function RoomBookBoxServicePrice({open, onClose,bottom} : Props) {
+function RoomBookBoxServicePrice({open, onClose,bottom,right} : Props) {
     const ctx = useContext(RoomContext);
     const dateCtx = useContext(RecommandDateContext);
 
@@ -38,8 +39,8 @@ function RoomBookBoxServicePrice({open, onClose,bottom} : Props) {
             <Box
                 style={{
                     position: "absolute",
-                    bottom: `${40*bottom}px`,
-                    right: "325px",
+                    bottom: `${45*bottom}px`,
+                    right: `${right}px`,
                     transformOrigin: "right bottom",
                     zIndex : 100,
                     backgroundColor: "rgb(255, 255, 255)",
@@ -49,7 +50,16 @@ function RoomBookBoxServicePrice({open, onClose,bottom} : Props) {
                     boxShadow: "rgb(0 0 0 / 28%) 0px 8px 28px",
                     width : "400px",
                 }}
-            >
+            ><Box
+            onClick={()=>onClose(false)}
+            sx={{
+                position: "fixed",
+                zIndex: -1,
+                top: 0,
+                left: 0,
+                width: '100vw',
+                height: '100vh'
+                }}></Box>
                 <Box sx={{pl : 1, display :"flex", alignItems :"center", padding   : "14px"}}>
                     <IconButton size="small" onClick={()=>{onClose(false)}}>
                         <CloseIcon fontSize="small"/>

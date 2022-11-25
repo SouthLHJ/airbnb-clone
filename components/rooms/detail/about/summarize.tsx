@@ -1,8 +1,8 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import { useContext } from "react";
-import { RoomContext } from "../../../../pages/rooms/[itemId]";
 import {BsKey,BsCalendarDate}from "react-icons/bs"
 import {IoMedalOutline}from "react-icons/io5"
+import { RoomContext } from "../../../../contexts/rooms";
 import { CustomColor } from "../../../../interfaces/setting/color";
 
 

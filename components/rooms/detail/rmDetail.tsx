@@ -1,15 +1,15 @@
 import { Box, Typography } from "@mui/material";
-import { useContext } from "react";
-import { RoomContext } from "../../../pages/rooms/[itemId]";
+import { useContext ,useRef } from "react";
+import { RoomContext } from "../../../contexts/rooms";
 import RoomAbout from "./about/about";
 import RoomBook from "./book/books";
 
 
 function RoomDetail() {
     const ctx = useContext(RoomContext);
-
     return (
-    <Box flex={1} sx={{display : "flex", flexDirection: "row"}}>
+    <Box flex={1} sx={{display : "flex", flexDirection: "row"}}
+    >
         <Box flex={1} sx={{mr : "20px"}}>
             <RoomAbout />
         </Box>

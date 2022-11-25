@@ -1,14 +1,18 @@
 import { Box, Typography } from "@mui/material";
-import { useContext } from "react";
-import { RoomContext } from "../../../pages/rooms/[itemId]";
+import { useContext,useRef } from "react";
+import {  RoomContext } from "../../../contexts/rooms";
+
 
 const textSt = {ml : 1, mr : 1}
 
 function RoomsHeader() {
     const ctx = useContext(RoomContext);
-
     return (
-    <Box flex={1} sx={{display : "flex", flexDirection: "column"}}>
+    <Box flex={1} sx={{display : "flex", flexDirection: "column"}}
+           
+    >
+        
+
         <Box>
             <Typography fontSize={"30px"} fontWeight={"bold"}>{ctx?.item.title}</Typography>
         </Box>

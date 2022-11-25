@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { useContext } from "react";
-import { RoomContext } from "../../../pages/rooms/[itemId]";
+import { RoomContext } from "../../../contexts/rooms";
+
 
 const textSt = {ml : 1, mr : 1}
 
