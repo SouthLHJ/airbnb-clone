@@ -14,6 +14,8 @@ export type Book = {
     org ?: object,
     roomId : string,
     completePay ?: Date,
+    hostname : string,
+    booker : string,
 }
 
 export type Guest = {

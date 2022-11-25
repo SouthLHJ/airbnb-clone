@@ -4,7 +4,7 @@ import { CustomColor } from "../../../../interfaces/setting/color";
 import { format } from "date-fns";
 import RoomBookBoxCalenderDialog from "./showCalender";
 import RoomBookBoxGuestDialog from "./showGuest";
-import { RecommandDateContext, RoomContext } from "../../../../contexts/rooms";
+import { RecommandDateContext, RecommandGuestContext, RoomContext } from "../../../../contexts/rooms";
 
 
 const boxtextT = {fontSize : "11px"}
@@ -14,6 +14,7 @@ const box = {width: "50%", borderStyle  : "solid", borderWidth : "0.1px", border
 function RoomBookBoxDate() {
     const ctx = useContext(RoomContext);
     const dateCtx= useContext(RecommandDateContext);
+    const guestCtx = useContext(RecommandGuestContext)
     const [showCalen,setShowCalen] = useState<boolean>(false);
     const [showGuest,setShowGuest] = useState<boolean>(false);
     const ref = useRef<HTMLDivElement>()
@@ -48,7 +49,7 @@ function RoomBookBoxDate() {
             onClick={()=>{setShowGuest(true); setShowCalen(false)}}
         > 
             <Typography sx={boxtextT}>인원</Typography>
-            <Typography sx={boxtextC}>게스트 {0}명</Typography>
+            <Typography sx={boxtextC}>게스트 {((guestCtx?.guest.adult??1)+(guestCtx?.guest.child ?? 0)+(guestCtx?.guest.infant??0))}명</Typography>
         </Box>
         
         <RoomBookBoxCalenderDialog open={showCalen} onClose={setShowCalen}/>

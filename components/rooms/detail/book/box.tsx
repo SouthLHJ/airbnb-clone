@@ -8,6 +8,7 @@ import RoomBookBoxPrice from "./price";
 import { RecommandDateContext, RecommandGuestContext, RoomContext } from "../../../../contexts/rooms";
 import { useRouter } from "next/router";
 import { Book } from "../../../../interfaces/book/book";
+import { useSession } from "next-auth/react";
 
 const textSt = {ml : 1, mr : 1}
 
@@ -17,12 +18,17 @@ const box = {width: "50%", borderStyle  : "solid", borderWidth : "0.1px", border
 
 function RoomBookBox() {
     const router = useRouter();
+    const session = useSession();
+    console.log(session);
     const ctx = useContext(RoomContext);
     const dateCtx = useContext(RecommandDateContext);
     const guestCtx = useContext(RecommandGuestContext);
 
     //func
     const onBook = async()=>{
+        if(session.status === "unauthenticated"){
+            return;
+        }
         const inDt = `${format(dateCtx?.date[0] as any, "yyyy-MM-dd")} /17:00:00`;
         const outDt = `${format(dateCtx?.date[1] as any, "yyyy-MM-dd")} /11:00:00`;
         let sndData= {
@@ -32,21 +38,24 @@ function RoomBookBox() {
             guestCurrencyOverride : "KRW",
             roomId : `${ctx?.item._id}`,
             businessTravel : {workTrip : false},
+            booker : session.data!.user?.email,
+            hostname : ctx?.item.hostName
         }
-        //DB에 저장하고
-        const rcv = await fetch(`/api/book`,{
-            method : "post",
-            body : JSON.stringify(sndData),
-            headers : {
-                "content-type" : "application/json"
-            }
-        })
-        const rst = await rcv.json();
-        //받은 _id를 추가해서
-        sndData = rst.datas
-        // 페이지 이동 시킴
-        console.log()
-
+        console.log(sndData)
+        // //DB에 저장하고
+        // const rcv = await fetch(`/api/book`,{
+        //     method : "post",
+        //     body : JSON.stringify(sndData),
+        //     headers : {
+        //         "content-type" : "application/json"
+        //     }
+        // })
+        // const rst = await rcv.json();
+        // //받은 _id를 추가해서
+        // sndData = rst.datas
+        // // 페이지 이동 시킴
+        // console.log(sndData)
+        
 
 
 
@@ -84,7 +93,7 @@ function RoomBookBox() {
         </Box>
 
         <Box sx={{width :"100%", mb : "24px"}}>
-            <Button onClick={()=>{}} sx={{width :"100%",backgroundImage:`linear-gradient(90deg,${CustomColor.mainHover}, ${CustomColor.main})`}}>
+            <Button onClick={()=>{onBook()}} sx={{width :"100%",backgroundImage:`linear-gradient(90deg,${CustomColor.mainHover}, ${CustomColor.main})`}}>
                 <Typography sx={{color:CustomColor.white}}>예약하기</Typography>
             </Button>
         </Box>
