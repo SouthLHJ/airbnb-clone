@@ -23,7 +23,9 @@ export default function Home({items,dirAmenity}:InferGetServerSidePropsType<type
         items.map(one=>{
           if(one.register){
             return (
-              <MainPagePreviewItem item={one}/>
+              <Box key={`${one._id}`}>
+                <MainPagePreviewItem item={one}/>
+              </Box>
             )
           }else{
             return null

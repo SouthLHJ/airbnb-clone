@@ -20,36 +20,20 @@ const useStyles = {
 
 function Navbar() {
   const [value, setValue] = useState(0);
-  const [list, setList] = useState<DirAmenity[]>();
   const dirAmenity = useDirAmenityState();
-  // console.log(process.env.NEXT_PUBLIC_SERVER_URI)
-  useEffect(()=>{
-    // const test = async()=>{
-    //   // async function init(){
-    //     const rcv = await fetch(process.env.NEXT_PUBLIC_SERVER_URI+"/api/dir/amenity",{
-    //       method: "get",
-    //     })
-    //     const rst = await rcv.json();
-    //     // console.log(rst)
-    //     if(rst.result){
-    //       setList( rst.datas);
-    //     }
-    //   // };
-    //   // init();
-    // }
-    // test();
-  },[])
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    if(newValue !==0 ){
+      console.log(newValue, dirAmenity![newValue-1].ko)
+    }
   };
 
   
-  
   return (
     <>
-        <Paper
-        elevation={0}
+      <Box
+        // elevation={0}
         sx={{
           width : "100%",
           display: 'flex',
@@ -99,8 +83,8 @@ function Navbar() {
                 
         </Paper>
 
-        <Paper
-            elevation={0}
+        <Box
+            // elevation={0}
             sx={{
                 display: 'flex',
                 border: (theme) => `1p  x solid ${theme.palette.divider}`,
@@ -112,10 +96,10 @@ function Navbar() {
                     <TuneIcon />
                     <p>필터</p>
                 </IconButton>
-        </Paper>
+        </Box>
 
         
-      </Paper>
+      </Box>
       
     </>
   );
