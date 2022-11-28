@@ -29,8 +29,8 @@ function RoomsLayout({children }: Props) {
     return (
     <DirAmenityProvider>
 
-        <Box sx={{pl : "50px", pr :"50px"}}>
-            <Box sx={{display : "flex" , flexDirection : "row", width  :"100%", alignItems :"center", pb : "24px", borderBottomStyle : "solid",borderBottomWidth : "0.2px",borderBottomColor : CustomColor.blackHover ,mt : "24px"}}>
+        <Box sx={{}}>
+            <Box sx={{display : "flex" , flexDirection : "row", width  :"100%", alignItems :"center", pl : "50px", pr :"50px", pb : "24px", borderBottomStyle : "solid",borderBottomWidth : "0.2px",borderBottomColor : CustomColor.whiteHover ,mt : "24px"}}>
                     <Box sx={{width : "35%"}}>
                         <IconButton sx={{color : CustomColor.main}}>
                         <SiAirbnb />
@@ -51,7 +51,10 @@ function RoomsLayout({children }: Props) {
                         </IconButton> 
                     </Box>
             </Box>
-            {children}
+            <Box sx={{pl : "50px", pr :"50px"}}>
+                {children}
+
+            </Box>
         </Box>
     </DirAmenityProvider>
     );

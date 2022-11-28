@@ -1,4 +1,7 @@
+import mongoose from "mongoose"
+
 export type Book = {
+    _id ?:mongoose.Types.ObjectId,
     businessTravel : {
         workTrip  : boolean
     },

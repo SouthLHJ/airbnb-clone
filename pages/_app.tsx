@@ -7,11 +7,13 @@ import MainLayout from '../components/layout/layout1';
 import BecomeHostLayout from '../components/layout/layout2';
 import {ReactNode, createContext, useState} from "react"
 import RoomsLayout from '../components/layout/layout3';
+import BooksLayout from "../components/layout/layout4";
 
 const layouts : keyvalue = {
   "L1": MainLayout ,
   "L2": BecomeHostLayout,
   "L3": RoomsLayout,
+  "L4": BooksLayout,
 };
 
 type keyvalue = {

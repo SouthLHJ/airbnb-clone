@@ -9,6 +9,7 @@ import { RecommandDateContext, RecommandGuestContext, RoomContext } from "../../
 import { useRouter } from "next/router";
 import { Book } from "../../../../interfaces/book/book";
 import { useSession } from "next-auth/react";
+import { AppContext } from "../../../../pages/_app";
 
 const textSt = {ml : 1, mr : 1}
 
@@ -19,7 +20,8 @@ const box = {width: "50%", borderStyle  : "solid", borderWidth : "0.1px", border
 function RoomBookBox() {
     const router = useRouter();
     const session = useSession();
-    console.log(session);
+    // console.log(session);
+    const loading = useContext(AppContext);
     const ctx = useContext(RoomContext);
     const dateCtx = useContext(RecommandDateContext);
     const guestCtx = useContext(RecommandGuestContext);
@@ -29,6 +31,7 @@ function RoomBookBox() {
         if(session.status === "unauthenticated"){
             return;
         }
+        loading?.ready();
         const inDt = `${format(dateCtx?.date[0] as any, "yyyy-MM-dd")} /17:00:00`;
         const outDt = `${format(dateCtx?.date[1] as any, "yyyy-MM-dd")} /11:00:00`;
         let sndData= {
@@ -42,32 +45,24 @@ function RoomBookBox() {
             hostname : ctx?.item.hostName
         }
         console.log(sndData)
-        // //DB에 저장하고
-        // const rcv = await fetch(`/api/book`,{
-        //     method : "post",
-        //     body : JSON.stringify(sndData),
-        //     headers : {
-        //         "content-type" : "application/json"
-        //     }
-        // })
-        // const rst = await rcv.json();
-        // //받은 _id를 추가해서
-        // sndData = rst.datas
-        // // 페이지 이동 시킴
-        // console.log(sndData)
-        
+        //DB에 저장하고
+        const rcv = await fetch(`/api/book`,{
+            method : "post",
+            body : JSON.stringify(sndData),
+            headers : {
+                "content-type" : "application/json"
+            }
+        })
+        const rst = await rcv.json();
+        if(rst.result){
+            //받은 _id를 추가해서
+            // 페이지 이동 시킴
+            const query = `?productId=${rst.datas._id}`+`&adult=${sndData.guestCounts.adult}`+`&child=${sndData.guestCounts.child}`+`&infant=${sndData.guestCounts.infant}`+`&pet=${sndData.guestCounts.pet}`
+                        +`&checkinDate=${sndData.checkinDate}`+`&checkoutDate=${sndData.checkoutDate}`+`&guestCurrencyOverride=${sndData.guestCurrencyOverride}`
+                        +`&roomId=${sndData.roomId}`+`&businessTravel=${sndData.businessTravel}`+`&booker=${sndData.booker}`+`&hostname=${sndData.hostname}`
+            router.push("/book/stays/"+query)
 
-
-
-        /*
-            &guestCurrency=KRW
-
-            &productId=716489971524221921
-
-            &isWorkTrip=false
-
-            &code=HMFSQP8NQR
-        */
+        }
     }
 
     return (
