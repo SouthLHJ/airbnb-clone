@@ -7,7 +7,6 @@ export type Book = {
     },
     checkinDate : string,
     checkoutDate : string,
-    confirmationCode ?: string,
     guestCounts : Guest,
     guestCurrencyOverride : string,
     lux ?: object,
@@ -16,9 +15,11 @@ export type Book = {
     },
     org ?: object,
     roomId : string,
-    completePay ?: Date,
+    paypal_orderID ?: string,
+    paypal_payerID ?: string,
+    pay_service ?: string,
+    guestname : string,
     hostname : string,
-    booker : string,
 }
 
 export type Guest = {
