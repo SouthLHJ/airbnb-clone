@@ -9,6 +9,7 @@ import { Box,  IconButton} from "@mui/material";
 import { CustomColor } from "../../../interfaces/setting/color";
 import { AccountProvider } from "../../../contexts/account";
 import { useAccountState,useAccountDispatch } from "../../../contexts/account";
+import { useRouter } from 'next/router';
 //component
 
 
@@ -17,11 +18,13 @@ type Props = {
 };
 
 function BooksLayout({children }: Props) {
+    const router = useRouter();
+
     return (
     <Box sx={{}}>
         <Box sx={{display : "flex" , flexDirection : "row", width  :"100%", alignItems :"center", pl : "50px", pr :"50px", pb : "24px", borderBottomStyle : "solid",borderBottomWidth : "0.2px",borderBottomColor : CustomColor.whiteHover ,mt : "24px"}}>
                 <Box sx={{width : "35%"}}>
-                    <IconButton sx={{color : CustomColor.main}}>
+                    <IconButton sx={{color : CustomColor.main}} onClick={()=>{router.push(`${process.env.NEXT_PUBLIC_SERVER_URI}`)}}>
                     <SiAirbnb />
                     </IconButton>
                 </Box>

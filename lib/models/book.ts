@@ -16,8 +16,7 @@ const BookSchema = new mongoose.Schema<Book>({
     pay_service : String,
     guestname : String,
     hostname : String,
-    
-
+    price : Number
 })
 
 export default mongoose.models.Book as mongoose.Model<Book> || mongoose.model<Book>("Book",BookSchema)

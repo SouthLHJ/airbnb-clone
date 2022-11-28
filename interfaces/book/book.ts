@@ -20,6 +20,7 @@ export type Book = {
     pay_service ?: string,
     guestname : string,
     hostname : string,
+    price : number
 }
 
 export type Guest = {

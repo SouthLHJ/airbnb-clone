@@ -1,20 +1,25 @@
 import {Box, Typography,Divider} from "@mui/material"
 import { Accommodation } from "../../../interfaces/becomehost/accommodation";
 import { CustomColor } from "../../../interfaces/setting/color";
+import {useRef} from "react"
 
 type Props={
     room : Accommodation | undefined,
 }
 
 function BookRoomBoxTitle({room} : Props) {
-    
+    const ref = useRef<HTMLElement>();
 
     if(!room){
         return null;
     }
+
+    console.log(ref.current?.offsetWidth!*0.4)
     return (
-    <Box sx={{display : "flex"}}>
-        <Box sx={{width  :"40%", height : "106px"}}>
+    <Box sx={{display : "flex"}}
+        ref = {ref}
+    >
+        <Box sx={{width  :`${ref.current?.offsetWidth!*0.4}`, height : `${ref.current?.offsetWidth!*0.4}`}}>
             <img
                 alt={"roomimg"}    
                 src={room.photos![0]}
