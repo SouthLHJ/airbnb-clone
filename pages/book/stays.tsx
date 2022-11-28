@@ -10,8 +10,8 @@ import BookRooms from "../../components/book/rooms/bkRooms";
 
 
 export const BookContext = createContext< { book :  {
-    productId :string,
-    businessTravel : object,
+
+    businessTravel : string,
     checkinDate : string,
     checkoutDate : string,
     adult : string,
@@ -21,7 +21,7 @@ export const BookContext = createContext< { book :  {
     guestCurrencyOverride : string,
     roomId : string,
     hostname : string,
-    booker : string,
+    guestname : string,
     } } | null>(null);
 
 
@@ -56,8 +56,8 @@ RoomsIndex.layout = "L4";
 
 
 export const getServerSideProps : GetServerSideProps<{datas : {
-    productId :string,
-    businessTravel : object,
+
+    businessTravel : string,
     checkinDate : string,
     checkoutDate : string,
     adult : string,
@@ -67,11 +67,11 @@ export const getServerSideProps : GetServerSideProps<{datas : {
     guestCurrencyOverride : string,
     roomId : string,
     hostname : string,
-    booker : string,
+    guestname : string,
     } 
     }> = async(context : GetServerSidePropsContext)=>{
     // console.log(context.query);
-    const    {productId}  = context.query;
+
     const    {adult} = context.query;
     const    {child} = context.query;
     const    {infant} = context.query;
@@ -81,14 +81,13 @@ export const getServerSideProps : GetServerSideProps<{datas : {
     const    {guestCurrencyOverride} = context.query;
     const    {roomId} = context.query;
     const    {businessTravel} = context.query;
-    const    {booker} = context.query;
+    const    {guestname} = context.query;
     const    {hostname} = context.query;
     // console.log(context.params);   
     // console.log(datadir)
     return {
         props : {
             datas : {
-                productId : productId as string,
                 adult : adult as string,
                 child: child as string,
                 infant: infant as string,
@@ -97,8 +96,8 @@ export const getServerSideProps : GetServerSideProps<{datas : {
                 checkoutDate: checkoutDate as string,
                 guestCurrencyOverride: guestCurrencyOverride as string,
                 roomId: roomId as string,
-                businessTravel: businessTravel as object,
-                booker: booker as string,
+                businessTravel: businessTravel as string,
+                guestname: guestname as string,
                 hostname: hostname as string
             }
         }

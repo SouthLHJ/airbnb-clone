@@ -40,29 +40,29 @@ function RoomBookBox() {
             guestCounts : guestCtx?.guest!,
             guestCurrencyOverride : "KRW",
             roomId : `${ctx?.item._id}`,
-            businessTravel : {workTrip : false},
-            booker : session.data!.user?.email,
+            businessTravel : false,
+            guestname : session.data!.user?.email,
             hostname : ctx?.item.hostName
         }
-        console.log(sndData)
+        // console.log(sndData)
         //DB에 저장하고
-        const rcv = await fetch(`/api/book`,{
-            method : "post",
-            body : JSON.stringify(sndData),
-            headers : {
-                "content-type" : "application/json"
-            }
-        })
-        const rst = await rcv.json();
-        if(rst.result){
+        // const rcv = await fetch(`/api/book`,{
+        //     method : "post",
+        //     body : JSON.stringify(sndData),
+        //     headers : {
+        //         "content-type" : "application/json"
+        //     }
+        // })
+        // const rst = await rcv.json();
+        // if(rst.result){
             //받은 _id를 추가해서
             // 페이지 이동 시킴
-            const query = `?productId=${rst.datas._id}`+`&adult=${sndData.guestCounts.adult}`+`&child=${sndData.guestCounts.child}`+`&infant=${sndData.guestCounts.infant}`+`&pet=${sndData.guestCounts.pet}`
+            // `?productId=${rst.datas._id}`+`
+            const query = `?adult=${sndData.guestCounts.adult}`+`&child=${sndData.guestCounts.child}`+`&infant=${sndData.guestCounts.infant}`+`&pet=${sndData.guestCounts.pet}`
                         +`&checkinDate=${sndData.checkinDate}`+`&checkoutDate=${sndData.checkoutDate}`+`&guestCurrencyOverride=${sndData.guestCurrencyOverride}`
-                        +`&roomId=${sndData.roomId}`+`&businessTravel=${sndData.businessTravel}`+`&booker=${sndData.booker}`+`&hostname=${sndData.hostname}`
+                        +`&roomId=${sndData.roomId}`+`&businessTravel=${sndData.businessTravel}`+`&guestname=${sndData.guestname}`+`&hostname=${sndData.hostname}`
             router.push("/book/stays/"+query)
-
-        }
+        // }
     }
 
     return (
