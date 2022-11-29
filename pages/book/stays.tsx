@@ -10,7 +10,7 @@ import BookRooms from "../../components/book/rooms/bkRooms";
 
 
 export const BookContext = createContext< { book :  {
-
+    _id :string,
     businessTravel : string,
     checkinDate : string,
     checkoutDate : string,
@@ -56,7 +56,7 @@ RoomsIndex.layout = "L4";
 
 
 export const getServerSideProps : GetServerSideProps<{datas : {
-
+    _id :string,
     businessTravel : string,
     checkinDate : string,
     checkoutDate : string,
@@ -71,7 +71,7 @@ export const getServerSideProps : GetServerSideProps<{datas : {
     } 
     }> = async(context : GetServerSidePropsContext)=>{
     // console.log(context.query);
-
+    const    {_id} = context.query;
     const    {adult} = context.query;
     const    {child} = context.query;
     const    {infant} = context.query;
@@ -88,6 +88,7 @@ export const getServerSideProps : GetServerSideProps<{datas : {
     return {
         props : {
             datas : {
+                _id : _id as string,
                 adult : adult as string,
                 child: child as string,
                 infant: infant as string,

@@ -14,12 +14,10 @@ function BookRoomBoxTitle({room} : Props) {
         return null;
     }
 
-    console.log(ref.current?.offsetWidth!*0.4)
     return (
     <Box sx={{display : "flex"}}
-        ref = {ref}
     >
-        <Box sx={{width  :`${ref.current?.offsetWidth!*0.4}`, height : `${ref.current?.offsetWidth!*0.4}`}}>
+        <Box sx={{width  : "200px", height : "200px"}}>
             <img
                 alt={"roomimg"}    
                 src={room.photos![0]}

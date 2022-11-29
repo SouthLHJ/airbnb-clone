@@ -1,13 +1,17 @@
 import {Box, Typography} from "@mui/material"
 import { BookContext } from "../../../pages/book/stays";
+import {format} from "date-fns";
+
 import {useContext} from "react"
 function BookBillDetail() {
     const bookCtx = useContext(BookContext)
+    console.log(new Date(Number(bookCtx?.book.checkoutDate)))
+
     return (
         <Box sx={{width : "100%"}}>
         <Box sx={{mb : "24px"}}>
             <Typography fontSize={"15px"} fontWeight={"bold"}>날짜</Typography>
-            <Typography fontSize={"15px"}>{bookCtx?.book.checkinDate.split("/")[0]}~{bookCtx?.book.checkoutDate.split("/")[0]}</Typography>
+            <Typography fontSize={"15px"}>{format(Number(bookCtx?.book.checkinDate), "yyyy.MM.dd.")}~{format(Number(bookCtx?.book.checkoutDate),"yyyy.MM.dd.")}</Typography>
         </Box>
         <Box>
             <Typography fontSize={"15px"} fontWeight={"bold"}>게스트</Typography>

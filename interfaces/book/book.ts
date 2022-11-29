@@ -1,12 +1,13 @@
 import mongoose from "mongoose"
+import { Accommodation } from "../../interfaces/becomehost/accommodation";
 
 export type Book = {
     _id ?:mongoose.Types.ObjectId,
     businessTravel : {
         workTrip  : boolean
     },
-    checkinDate : string,
-    checkoutDate : string,
+    checkinDate : Date,
+    checkoutDate : Date,
     guestCounts : Guest,
     guestCurrencyOverride : string,
     lux ?: object,
@@ -20,7 +21,9 @@ export type Book = {
     pay_service ?: string,
     guestname : string,
     hostname : string,
-    price : number
+    price : number,
+    reserveTime : Date | null,
+    roomData ?: Accommodation,
 }
 
 export type Guest = {

@@ -7,8 +7,15 @@ const handler : NextApiHandler = async(req,res)=>{
     await dbConnect();
 
     if(req.method === "POST"){
-        const rcv = await book.create(req.body)
-        return res.status(201).json({result :true, datas  : rcv })
+        if(req.query.update){
+            const rcv = await book.findOneAndUpdate({_id : req.body._id},req.body,{returnDocument: "after"})
+
+            return res.status(201).json({result : true, datas : rcv})
+
+        }else{
+            const rcv = await book.create(req.body)
+            return res.status(201).json({result :true, datas  : rcv })
+        }
     }else if(req.method === "GET"){
         try{
             const rcv = await book.find({_id : req.query._id})

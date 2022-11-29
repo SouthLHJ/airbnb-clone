@@ -18,8 +18,8 @@ function BookChecked({item,room}:InferGetServerSidePropsType<typeof getServerSid
     },[])
 
 
-    const day1 = item.checkinDate.split("/")[0]
-    const day2 = item.checkoutDate.split("/")[0]
+    const day1 = item.checkinDate
+    const day2 = item.checkoutDate
 
     const price = (room.price!*differenceInDays(new Date(day2!),new Date(day1!)))
     const cleanPirce = 53902;
@@ -72,7 +72,7 @@ function BookChecked({item,room}:InferGetServerSidePropsType<typeof getServerSid
                     </Box>
                     <Box>
                         <Typography  fontSize={"20px"} fontWeight={"bold"}  sx={{mb : "8px"}}>예약 날짜</Typography>
-                        <Typography  fontSize={"15px"}>{item.checkinDate.split("/")[0]} - {item.checkoutDate.split("/")[0]}</Typography>
+                        <Typography  fontSize={"15px"}>{`${item.checkinDate} - ${item.checkoutDate}`} </Typography>
                     </Box>
                     <Box>
                         <Typography  fontSize={"20px"} fontWeight={"bold"}  sx={{mb : "8px"}}>예약 인원</Typography>

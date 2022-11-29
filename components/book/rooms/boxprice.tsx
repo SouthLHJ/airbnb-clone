@@ -28,10 +28,10 @@ function BookRoomBoxPrice({room} : Props) {
     const [showclean, setShowclean] = useState<boolean>(false);
     const [showservice, setShowservice] = useState<boolean>(false);
 
-    const day1 = bookCtx?.book?.checkinDate.split("/")[0]
-    const day2 = bookCtx?.book?.checkoutDate.split("/")[0]
+    const day1 = new Date(Number(bookCtx?.book!.checkinDate))
+    const day2 = new Date(Number(bookCtx?.book?.checkoutDate))
 
-    const price = (room.price!*differenceInDays(new Date(day2!),new Date(day1!)))
+    const price = (room.price!*differenceInDays(day2,day1!))
     const cleanPirce = 53902;
     const servicePrice = Math.ceil(price*0.163);
 
