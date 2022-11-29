@@ -13,18 +13,14 @@ import { useAccountState,useAccountDispatch } from "../../../contexts/account";
 import { DirAmenityProvider } from "../../../contexts/amenities";
 import HeaderMenu from "../../header/headerMenu";
 import HeaderMiddle from '../../header/headerMiddle';
+import { useRouter } from 'next/router';
 
 type Props = {
     children: ReactNode;
 };
 
 function RoomsLayout({children }: Props) {
-    const [popup, setPopup] = useState<boolean>(false);
-
-
-    const onPopupIcon : MouseEventHandler<HTMLElement> = (evt) =>{
-        setPopup(true)
-    }
+    const router = useRouter();
 
     return (
     <DirAmenityProvider>
@@ -32,24 +28,14 @@ function RoomsLayout({children }: Props) {
         <Box sx={{}}>
             <Box sx={{display : "flex" , flexDirection : "row", width  :"100%", alignItems :"center", pl : "50px", pr :"50px", pb : "24px", borderBottomStyle : "solid",borderBottomWidth : "0.2px",borderBottomColor : CustomColor.whiteHover ,mt : "24px"}}>
                     <Box sx={{width : "35%"}}>
-                        <IconButton sx={{color : CustomColor.main}}>
+                        <IconButton sx={{color : CustomColor.main}} onClick={()=>router.push(process.env.NEXT_PUBLIC_SERVER_URI!)}>
                         <SiAirbnb />
                         </IconButton>
                     </Box>
                     <Box sx={{width : "35%", textAlign : "center"}}>
                         <HeaderMiddle/>
                     </Box>
-                    <Box  sx={{width : "35%", textAlign : "right"}}>
-                        <IconButton
-                            onClick={(evt)=>onPopupIcon(evt)}
-                            aria-controls={popup ? 'account-menu' : undefined}
-                            aria-haspopup="true"
-                            aria-expanded={popup ? 'true' : undefined}
-                        >
-                            <MenuIcon/>
-                            <AccountCircleIcon/>
-                        </IconButton> 
-                    </Box>
+
             </Box>
             <Box sx={{pl : "50px", pr :"50px"}}>
                 {children}

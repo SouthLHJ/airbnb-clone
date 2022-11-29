@@ -1,7 +1,7 @@
 import { Box, Typography,Button , Alert } from "@mui/material";
 import { useContext } from "react";
 import { CustomColor } from "../../../../interfaces/setting/color";
-import { format } from "date-fns";
+import { format, isEqual } from "date-fns";
 import RoomBookBoxTitle from "./boxtitle";
 import RoomBookBoxDate from "./boxdate";
 import RoomBookBoxPrice from "./price";
@@ -91,13 +91,13 @@ function RoomBookBox() {
     let isdate= (
     <>
      <Box sx={{width :"100%", mb : "24px"}}>
-        <Button onClick={()=>{onBook()}} sx={{width :"100%",backgroundImage:`linear-gradient(90deg,${CustomColor.mainHover}, ${CustomColor.main})`}} disabled>
+        <Button onClick={()=>{onBook()}} sx={{width :"100%",backgroundColor: CustomColor.blackHover}} disabled>
             <Typography sx={{color:CustomColor.white}}>날짜를 선택해주세요</Typography>
         </Button>
     </Box>
     </>);
 
-    if(dateCtx?.date[1]){
+    if(dateCtx?.date[1] && !isEqual(dateCtx?.date[1] as any , dateCtx?.date[0] as any) ){
         isdate = (<>
         <Box sx={{width :"100%", mb : "24px"}}>
             <Button onClick={()=>{onBook()}} sx={{width :"100%",backgroundImage:`linear-gradient(90deg,${CustomColor.mainHover}, ${CustomColor.main})`}}>
