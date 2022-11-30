@@ -9,8 +9,8 @@ const handler : NextApiHandler = async(req,res)=>{
 
     if(req.method === "GET"){
         try{
-            const rcv = await accommodations.find({})
-            // console.log(rcv)
+            const rcv = await accommodations.find({}).populate("book").lean();
+            console.log("??",rcv)
             return res.status(200).json({result : true, datas: rcv})
         }catch(e:any){
             return res.status(422).json({result : false, error: e.message})

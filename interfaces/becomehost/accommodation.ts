@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import { Book } from "../book/book"
 
 export type BecomeHostResponse = {
     result : boolean,
@@ -20,7 +21,8 @@ export type Accommodation = {
     description ?: Description,
     price ?: number,
     register ?: Date,
-    createdAt  : Date
+    createdAt  : Date,
+    book : Book[]
 }
 
 export type Location = {

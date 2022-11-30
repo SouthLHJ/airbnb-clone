@@ -1,6 +1,6 @@
 import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType, } from 'next';
 import {useContext} from "react"
-import {Box}from "@mui/material"
+import {Box,Button}from "@mui/material"
 import { useSession } from 'next-auth/react';
 import Head from 'next/head'
 import Image from 'next/image'
@@ -22,6 +22,7 @@ export default function Home({items,dirAmenity}:InferGetServerSidePropsType<type
     dirDispatch({type: "save", payload : dirAmenity})
   },[navCtx])
 
+  // console.log();
 
   let amenit : any[] = [];
   items.forEach(one=>{
@@ -44,6 +45,14 @@ export default function Home({items,dirAmenity}:InferGetServerSidePropsType<type
 
   return (
     <Box sx={{display:"flex", flexWrap : "wrap", flexDirection :"row", padding : "24px", gap : "10px"}}>
+      <Button onClick={async()=>{
+        const rcv = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/api/accommodation/list`,{method:"get"})
+        const data = await rcv.json();
+        console.log(data)
+      }}>
+        test
+      </Button>
+
       { 
         items.map(one=>{
           if(amenit.includes(one._id)){
@@ -68,12 +77,12 @@ export const getServerSideProps : GetServerSideProps<{items : Accommodation[] , 
 
   const rcv = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/api/accommodation/list`,{method:"get"})
   const data = await rcv.json();
-  const rcvdir = await await fetch(process.env.NEXT_PUBLIC_SERVER_URI+"/api/dir/amenity",{method: "get"})
+  const rcvdir = await fetch(process.env.NEXT_PUBLIC_SERVER_URI+"/api/dir/amenity",{method: "get"})
   const datadir = await rcvdir.json();
 
   return {
     props :{
-      items : data.datas,
+      items : data.datas ?? [],
       dirAmenity : datadir.datas
     }
   }

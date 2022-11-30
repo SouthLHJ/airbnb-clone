@@ -17,4 +17,11 @@ const AccommodationSchema = new mongoose.Schema<Accommodation>({
     createdAt : Date,
 })
 
+AccommodationSchema.virtual("book",{
+    localField : "_id",
+    ref : "Book",
+    foreignField : "roomId"
+})
+
+
 export default mongoose.models.Accommodation as mongoose.Model<Accommodation> || mongoose.model<Accommodation>("Accommodation",AccommodationSchema)

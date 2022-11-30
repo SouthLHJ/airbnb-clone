@@ -120,7 +120,7 @@ const Calender = ()=>{
                 value={date as any}
                 // minDate={5}
                 inputFormat={"yyyy-MM-dd"}
-                onChange={(newValue) => {headerCtx?.setDate(newValue)}}
+                onChange={(newValue) => {headerCtx?.setDate(newValue as any)}}
                 renderDay={renderWeekPickerDay}
                 renderInput={(startProps, endProps) =>{
                     return (
