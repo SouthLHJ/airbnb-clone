@@ -26,7 +26,7 @@ function MainLayout({children} : {children:ReactNode}) {
 
 
         <DirAmenityProvider>
-        <AppBar position="sticky" sx={{ top: 0, bottom: 'auto', boxShadow :0, bgcolor:'white', color: 'text.primary' ,zIndex :1200    }}>
+        <AppBar position="sticky" sx={{ top: 0, bottom: 'auto', boxShadow :0, bgcolor:'white', color: 'text.primary' ,zIndex :1200,    }}>
             <header>
             <Toolbar>
                 <Header />
