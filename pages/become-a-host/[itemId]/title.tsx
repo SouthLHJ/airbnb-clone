@@ -4,7 +4,7 @@ import { authOptions } from "../../api/auth/[...nextauth]";
 import { useRouter } from "next/router";
 import { Button, Typography, Grid, ToggleButton } from "@mui/material";
 import Box from "@mui/material/Box";
-import {useState,useEffect} from "react"
+import {useState,useEffect,useContext} from "react"
 import BecomeHostComment from "../../../components/becomehost/comment";
 import { CustomColor } from "../../../interfaces/setting/color";
 import BecomehostBottom from "../../../components/becomehost/bhBottom";
@@ -12,9 +12,11 @@ import BecomeHostSaveBottom from "../../../components/becomehost/bhSaveBottom";
 import { Accommodation, Amenities, FloorPlan, Location } from "../../../interfaces/becomehost/accommodation";
 import BecomeHostAmenities from "../../../components/becomehost/amenities/bhAmenities";
 import BecomeHostTitle from "../../../components/becomehost/title/bhTitle";
+import { AppContext } from "../../_app";
 
 
 function Title({item}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+    const loading = useContext(AppContext);
     const router = useRouter();
 
     const {itemId} = router.query;
@@ -25,6 +27,7 @@ function Title({item}: InferGetServerSidePropsType<typeof getServerSideProps>) {
         if(item.title){
             setTitle(item.title);
         }
+        loading?.done()
     },[])
 
 
@@ -34,6 +37,7 @@ function Title({item}: InferGetServerSidePropsType<typeof getServerSideProps>) {
         if(title.length >32 || title.length === 0){
             return ;
         }
+        loading?.ready();
         //DB에 데이터 추가하기
         const rst = await updateDB();
         console.log(rst);

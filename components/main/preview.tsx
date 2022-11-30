@@ -81,11 +81,11 @@ function MainPagePreviewItem({item}:Props) {
             </Box>
 
             <Box sx={{position : "absolute", bottom : 10, display:"flex"}}>
-                <Typography fontSize={"20px"} color={imgNum===0 ? CustomColor.white : whitehover}>●</Typography>
-                <Typography fontSize={"20px"} color={imgNum===1 ? CustomColor.white : whitehover}>●</Typography>
-                <Typography fontSize={"20px"} color={imgNum===2 ? CustomColor.white : whitehover}>●</Typography>
-                <Typography fontSize={"20px"} color={imgNum===3 ? CustomColor.white : whitehover}>●</Typography>
-                <Typography fontSize={"20px"} color={imgNum===4 ? CustomColor.white : whitehover}>●</Typography>
+                <Typography fontSize={"18px"} color={imgNum===0 ? CustomColor.white : whitehover}>●</Typography>
+                <Typography fontSize={"18px"} color={imgNum===1 ? CustomColor.white : whitehover}>●</Typography>
+                <Typography fontSize={"18px"} color={imgNum===2 ? CustomColor.white : whitehover}>●</Typography>
+                <Typography fontSize={"18px"} color={imgNum===3 ? CustomColor.white : whitehover}>●</Typography>
+                <Typography fontSize={"18px"} color={imgNum===4 ? CustomColor.white : whitehover}>●</Typography>
             </Box>
 
         </Box>

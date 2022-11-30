@@ -4,18 +4,19 @@ import { authOptions } from "../../api/auth/[...nextauth]";
 import { useRouter } from "next/router";
 import { Button, Typography, Grid, ToggleButton } from "@mui/material";
 import Box from "@mui/material/Box";
-import {useState,useEffect} from "react"
+import {useState,useEffect,useContext} from "react"
 import BecomeHostComment from "../../../components/becomehost/comment";
 import { CustomColor } from "../../../interfaces/setting/color";
 import BecomehostBottom from "../../../components/becomehost/bhBottom";
 import BecomeHostSaveBottom from "../../../components/becomehost/bhSaveBottom";
 import { Accommodation, Amenities, Description, FloorPlan, Location } from "../../../interfaces/becomehost/accommodation";
 import BecomeHostDescription from "../../../components/becomehost/description/bhDescription";
+import { AppContext } from "../../_app";
 
 
 function Descriptions({item}: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const router = useRouter();
-
+    const loading = useContext(AppContext);
     const {itemId} = router.query;
 
     const [comment, setComment] = useState<string>("")
@@ -26,6 +27,7 @@ function Descriptions({item}: InferGetServerSidePropsType<typeof getServerSidePr
             setSelect(item.description.categories);
             setComment(item.description.comment);
         }
+        loading?.done();
     },[])
 
 

@@ -7,8 +7,8 @@ function ReceiptPreview() {
     const url = accommodation ? accommodation.photos![0] : "";
 
     return (
-    <Box sx={{width:"400px",height :"250px",borderRadius : 2, boxShadow : "0 6px 16px rgba(0,0,0,0.12)", padding : 2, animation : "fadein 1s"}}>
-        <Box sx={{width : "100%", display : "flex", alignItems :"center", justifyContent :"center"}}>
+    <Box sx={{width:"400px",height :"450px",borderRadius : 2, boxShadow : "0 6px 16px rgba(0,0,0,0.12)", padding : 2, animation : "fadein 1s"}}>
+        <Box sx={{width : "380px", height : "380px", display : "flex", alignItems :"center", justifyContent :"center"}}>
             <img
                 alt={"headerimg"}    
                 src={url}

@@ -148,9 +148,9 @@ function RoomAboutCalender() {
         subTitle = <Typography  fontSize={"13px"} color={"gray"}>최소 숙박일 수 1박</Typography>
     }else{
         subTitle = (<>
-        <Typography  fontSize={"13px"} color={"gray"}>{getYear(date[0] as any)}년 {getMonth(date[0] as any)}월 {getDate(date[0] as any)}일</Typography>
+        <Typography  fontSize={"13px"} color={"gray"}>{getYear(date[0] as any)}년 {getMonth(date[0] as any)+1}월 {getDate(date[0] as any)}일</Typography>
         <Typography  fontSize={"13px"} color={"gray"} sx={{pl : 1, pr : 1}}>-</Typography>
-        <Typography  fontSize={"13px"} color={"gray"}> {getYear(date[1] as any)}년 {getMonth(date[1] as any)}월 {getDate(date[1] as any)}일</Typography>
+        <Typography  fontSize={"13px"} color={"gray"}> {getYear(date[1] as any)}년 {getMonth(date[1] as any)+1}월 {getDate(date[1] as any)}일</Typography>
         </>)
     }
 

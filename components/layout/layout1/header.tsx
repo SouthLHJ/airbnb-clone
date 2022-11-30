@@ -66,13 +66,13 @@ export default function Header (){
         <>  
             <AccountProvider>
 
-            <Box sx={{display : "flex" , flexDirection : "row", width  :"100%", alignItems :"center"}}>
+            <Box sx={{display : "flex" , flexDirection : "row", width  :"100vw", alignItems :"center",backgroundColor : "white"}}>
                 <Box sx={{width : "35%"}}>
                     <IconButton sx={{color : CustomColor.main}}>
                     <SiAirbnb />
                     </IconButton>
                 </Box>
-                <Box sx={{width : "35%", textAlign : "center"}}>
+                <Box sx={{minWidth : "620px", textAlign : "center"}}>
                     <HeaderMiddle/>
                 </Box>
                 <Box  sx={{width : "35%", textAlign : "right"}}>

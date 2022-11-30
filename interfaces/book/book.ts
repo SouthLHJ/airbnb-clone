@@ -23,7 +23,7 @@ export type Book = {
     hostname : string,
     price : number,
     reserveTime : Date | null,
-    roomData ?: Accommodation,
+    roomData ?: Accommodation[],
 }
 
 export type Guest = {

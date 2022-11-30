@@ -1,7 +1,9 @@
 import { Menu, MenuItem, Avatar, Divider, ListItemIcon } from "@mui/material";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import {useContext}from "react"
 import { useAccountDispatch } from "../../contexts/account";
+import { AppContext } from "../../pages/_app";
 
 type Props = {
     anchor: HTMLElement | null,
@@ -13,6 +15,7 @@ type Props = {
 export default function HeaderMenu({ anchor, popup, offPopupIcon, onRegisterAccount }: Props) {
     const { data, status } = useSession();
     const dispatch = useAccountDispatch();
+    const loading = useContext(AppContext)
     const router = useRouter();
     
     // console.log(data, status)
@@ -65,7 +68,7 @@ export default function HeaderMenu({ anchor, popup, offPopupIcon, onRegisterAcco
                         <MenuItem onClick={() => { }} sx={{ fontWeight: "bold" }}>
                             알림
                         </MenuItem>
-                        <MenuItem onClick={() => { }} sx={{ fontWeight: "bold" }}>
+                        <MenuItem onClick={() => {router.push(`${process.env.NEXT_PUBLIC_SERVER_URI}/trip`) ; loading?.ready();}} sx={{ fontWeight: "bold" }}>
                             여행
                         </MenuItem>
                         <MenuItem onClick={() => { }} sx={{ fontWeight: "bold" }}>

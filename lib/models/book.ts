@@ -19,15 +19,15 @@ const BookSchema = new mongoose.Schema<Book>({
     price : Number,
     reserveTime : {type : Date},
 })
-
-export default mongoose.models.Book as mongoose.Model<Book> || mongoose.model<Book>("Book",BookSchema)
-
-
 BookSchema.virtual("roomData", {
     localField: "roomId",
     ref: "Accommodation",
     foreignField: "_id",
   });
+
+export default mongoose.models.Book as mongoose.Model<Book> || mongoose.model<Book>("Book",BookSchema)
+
+
 
 
   /*

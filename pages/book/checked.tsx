@@ -30,6 +30,9 @@ function BookChecked({item,room}:InferGetServerSidePropsType<typeof getServerSid
         currency : "krw"
     })
 
+    const cin = new Date(item.checkinDate).toLocaleDateString("ko");
+    const cout = new Date(item.checkoutDate).toLocaleDateString("ko");
+
     return (
         <Box sx={{width : "100%", display :"flex", flexDirection : "column", alignItems :"center"}}>
             <Box sx={{width: "100%" ,mt: "24px", mb:"24px", pl : "25%"}}>
@@ -72,7 +75,7 @@ function BookChecked({item,room}:InferGetServerSidePropsType<typeof getServerSid
                     </Box>
                     <Box>
                         <Typography  fontSize={"20px"} fontWeight={"bold"}  sx={{mb : "8px"}}>예약 날짜</Typography>
-                        <Typography  fontSize={"15px"}>{`${item.checkinDate} - ${item.checkoutDate}`} </Typography>
+                        <Typography  fontSize={"15px"}>{`${cin} - ${cout}`} </Typography>
                     </Box>
                     <Box>
                         <Typography  fontSize={"20px"} fontWeight={"bold"}  sx={{mb : "8px"}}>예약 인원</Typography>

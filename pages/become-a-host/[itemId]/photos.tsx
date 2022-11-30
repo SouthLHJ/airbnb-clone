@@ -4,7 +4,7 @@ import { authOptions } from "../../api/auth/[...nextauth]";
 import { useRouter } from "next/router";
 import { Button, Typography, Grid, ToggleButton } from "@mui/material";
 import Box from "@mui/material/Box";
-import {useState,useEffect} from "react"
+import {useState,useEffect,useContext} from "react"
 import BecomeHostComment from "../../../components/becomehost/comment";
 import { CustomColor } from "../../../interfaces/setting/color";
 import BecomehostBottom from "../../../components/becomehost/bhBottom";
@@ -13,9 +13,11 @@ import { Accommodation, Amenities, FloorPlan, Location } from "../../../interfac
 import BecomeHostAmenities from "../../../components/becomehost/amenities/bhAmenities";
 import BecomeHostPhotos from "../../../components/becomehost/photos/bhPhotos";
 import { usePhotosDispatch, usePhotosState, useUrlsDispatch, useUrlsState } from "../../../contexts/photos";
+import { AppContext } from "../../_app";
 
 
 function Photos({item}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+    const loading = useContext(AppContext)
     const router = useRouter();
     const photo = usePhotosState();
     const dispatch = usePhotosDispatch();
@@ -39,6 +41,7 @@ function Photos({item}: InferGetServerSidePropsType<typeof getServerSideProps>) 
         const dltrst = await deleteFiles();
         // console.log(dltrst);
         if(dltrst.result){
+            loading?.ready()
             if(photo.length !== 0){
                 const formData = new FormData();
                 formData.append("itemId",itemId as string);

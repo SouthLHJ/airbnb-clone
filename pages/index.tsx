@@ -1,4 +1,5 @@
-import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType, } from 'next';
+import {useContext} from "react"
 import {Box}from "@mui/material"
 import { useSession } from 'next-auth/react';
 import Head from 'next/head'
@@ -9,28 +10,50 @@ import MainPagePreviewItem from '../components/main/preview';
 import { useEffect, useState } from 'react';
 import { DirAmenity } from '../lib/models/dirAmenities';
 import { useDirAmenityDispatch } from '../contexts/amenities';
+import { NavContext } from '../components/layout/layout1';
 
 export default function Home({items,dirAmenity}:InferGetServerSidePropsType<typeof getServerSideProps>) {
-  // export default function Home() {
-  // const [items, setItems] = useState<Accommodation[]>();
+  
+  const navCtx = useContext(NavContext);
+  
   const dirDispatch = useDirAmenityDispatch();
+
   useEffect(()=>{
     dirDispatch({type: "save", payload : dirAmenity})
-  },[])
+
+
+
+
+  },[navCtx])
+
+
+  let amenit : any[] = [];
+
+  items.forEach(one=>{
+    if(one.register){
+    if(one.amenities?.convenient.includes(navCtx?.ame?.amenitiy as string)){
+      amenit.push(one._id)
+    }else if(one.amenities?.safeItem.includes(navCtx?.ame?.amenitiy as string)){
+      amenit.push(one._id)
+    }else if(one.amenities?.specialConvenient.includes(navCtx?.ame?.amenitiy as string)){
+      amenit.push(one._id)
+    }else if(navCtx?.ame?.amenitiy === "new"){
+      amenit.push(one._id)
+    }
+    }
+  })
+
   return (
     <Box sx={{display:"flex", flexWrap : "wrap", flexDirection :"row", padding : "24px", gap : "10px"}}>
-      { items &&
+      { 
         items.map(one=>{
-          if(one.register){
+          if(amenit.includes(one._id)){
             return (
               <Box key={`${one._id}`}>
                 <MainPagePreviewItem item={one}/>
               </Box>
             )
-          }else{
-            return null
           }
-          
         })
       }
     </Box>

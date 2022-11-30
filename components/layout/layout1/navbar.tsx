@@ -1,10 +1,11 @@
 //https://mui.com/material-ui/react-drawer/
 import { Box, IconButton, Paper, Tab, Tabs, ToggleButton ,ToggleButtonGroup, Button } from '@mui/material';
 import TuneIcon from '@mui/icons-material/Tune';
-import {useState,useEffect} from "react"
+import {useState,useEffect,useContext} from "react"
 import { CustomColor } from '../../../interfaces/setting/color';
 import { DirAmenity } from '../../../lib/models/dirAmenities';
 import { useDirAmenityState } from '../../../contexts/amenities';
+import { NavContext } from '.';
 
 const useStyles = {
     customStyleOnTab: {
@@ -20,12 +21,16 @@ const useStyles = {
 
 function Navbar() {
   const [value, setValue] = useState(0);
+  const navCtx = useContext(NavContext)
   const dirAmenity = useDirAmenityState();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     if(newValue !==0 ){
-      console.log(newValue, dirAmenity![newValue-1].ko)
+      navCtx?.setAme(dirAmenity![newValue-1])
+      // console.log(newValue, dirAmenity![newValue-1].ko)
+    }else{
+      navCtx?.setAme({amenitiy : "new", image :"",ko : "신규"})
     }
   };
 
@@ -47,7 +52,7 @@ function Navbar() {
             sx={{
                 width : "94%",
                 display: 'flex',
-                mr : "-180px",
+                mr : "-2%",
                 justifyContent : "center",
             }}
         >
@@ -89,7 +94,7 @@ function Navbar() {
                 display: 'flex',
                 border: (theme) => `1p  x solid ${theme.palette.divider}`,
                 flexWrap: 'wrap',
-                mr : "-50px",
+                mr : "10px",
               }}
         >
                 <IconButton size='small'>
