@@ -161,9 +161,9 @@ function BookBillPay() {
     return (
         <Box sx={{mb : "24px"}}>
             <Typography fontSize={"20px"} fontWeight={"bold"}>결제 방식 선택하기</Typography>
-            <Button onClick={()=>ontest()}>
+            {/* <Button onClick={()=>ontest()}>
                 test
-            </Button>
+            </Button> */}
             <PayPalScriptProvider
                 options={{ 
                     "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID!,
