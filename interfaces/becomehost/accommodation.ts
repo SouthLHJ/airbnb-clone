@@ -22,7 +22,7 @@ export type Accommodation = {
     price ?: number,
     register ?: Date,
     createdAt  : Date,
-    books : Book[]
+    books ?: Book[]
 }
 
 export type Location = {

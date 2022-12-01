@@ -55,18 +55,20 @@ export default function Home({items,dirAmenity}:InferGetServerSidePropsType<type
           if(amenit.includes(one._id)){
             let isDate = true;
             if(!isEqual(headerCtx?.date[0] as any, headerCtx?.date[1] as any)){
-              const a= one.books.sort((a,b)=>{
-                return (new Date(a.checkinDate).valueOf() - new Date(b.checkinDate).valueOf())
-              })
-              // 검색한 날짜의 안에 예약된 룸은 제외하고, 검색한 날짜의 체크인 날짜가 book 체크하던 중에 체크아웃 날짜가 초과가 된다면 더이상 체크할 필요 없으므로 정지
-              for(let i = 0 ; i<a.length;i++){
-                if((new Date(a[i].checkinDate) <= new Date(headerCtx?.date[0] as any) && new Date(a[i].checkoutDate) >= new Date(headerCtx?.date[0] as any)) ||
-                (new Date(a[i].checkinDate) <= new Date(headerCtx?.date[1] as any) && new Date(a[i].checkoutDate) >= new Date(headerCtx?.date[1] as any))
-                ){
-                  isDate=false;
-                }
-                if(new Date(addDays(headerCtx?.date[0] as any,30)) < new Date(a[i].checkinDate)){
-                  break;
+              if(one.books){
+                const a= one.books.sort((a,b)=>{
+                  return (new Date(a.checkinDate).valueOf() - new Date(b.checkinDate).valueOf())
+                })
+                // 검색한 날짜의 안에 예약된 룸은 제외하고, 검색한 날짜의 체크인 날짜가 book 체크하던 중에 체크아웃 날짜가 초과가 된다면 더이상 체크할 필요 없으므로 정지
+                for(let i = 0 ; i<a.length;i++){
+                  if((new Date(a[i].checkinDate) <= new Date(headerCtx?.date[0] as any) && new Date(a[i].checkoutDate) >= new Date(headerCtx?.date[0] as any)) ||
+                  (new Date(a[i].checkinDate) <= new Date(headerCtx?.date[1] as any) && new Date(a[i].checkoutDate) >= new Date(headerCtx?.date[1] as any))
+                  ){
+                    isDate=false;
+                  }
+                  if(new Date(addDays(headerCtx?.date[0] as any,30)) < new Date(a[i].checkinDate)){
+                    break;
+                  }
                 }
               }
             }
