@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Accommodation } from "../../interfaces/becomehost/accommodation";
+import book from "./book";
 
 const AccommodationSchema = new mongoose.Schema<Accommodation>({
     hostName : String,
@@ -17,7 +18,7 @@ const AccommodationSchema = new mongoose.Schema<Accommodation>({
     createdAt : Date,
 })
 
-AccommodationSchema.virtual("book",{
+AccommodationSchema.virtual("books",{
     localField : "_id",
     ref : "Book",
     foreignField : "roomId"

@@ -110,12 +110,12 @@ function BecomeHostMap({placeAbout,setPlaceAbout,fixed,setFixed} :Props) {
             const rcv = await fetch(`/redis/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}`,{method:"get"})
             const data = await rcv.json();
             const rst : any[] = data.results 
-            // console.log(rst)
+            console.log(latitude,longitude)
             const item = rst.sort((a:any, b: any)=>{
                 // console.log(a.address_components.length - b.address_components.length, a.address_components.length , b.address_components.length)
                 return (b.address_components.length - a.address_components.length)
             })
-            // console.log(item)
+            console.log(item)
             const address = item[0].formatted_address.split(" ");
             const zip = item[0].address_components.find((one:any)=>{
                 // console.log(one.long_name.includes("-"), one.long_name)

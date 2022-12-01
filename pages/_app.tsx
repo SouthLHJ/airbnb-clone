@@ -8,6 +8,9 @@ import BecomeHostLayout from '../components/layout/layout2';
 import {ReactNode, createContext, useState} from "react"
 import RoomsLayout from '../components/layout/layout3';
 import BooksLayout from "../components/layout/layout4";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import accommodations from "../lib/models/accommodations";
+import book from "../lib/models/book";
 
 const layouts : keyvalue = {
   "L1": MainLayout ,
@@ -37,6 +40,8 @@ export default function App({ Component, pageProps : { session, ...pageProps }  
     const done = () => {
       setLoading(false);
     };
+
+
   return(
     <> 
     <SessionProvider>
@@ -53,4 +58,14 @@ export default function App({ Component, pageProps : { session, ...pageProps }  
     </SessionProvider>
     </>
   )
+}
+
+export const getServerSideProps : GetServerSideProps<{}> = async(context : GetServerSidePropsContext)=>{
+  const a = await accommodations.create({});
+  const b = await book.create({})
+  return {
+    props :{
+
+    }
+  }
 }

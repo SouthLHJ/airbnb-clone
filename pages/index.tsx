@@ -1,13 +1,11 @@
 import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType, } from 'next';
 import {useContext} from "react"
 import {Box,Button}from "@mui/material"
-import { useSession } from 'next-auth/react';
-import Head from 'next/head'
-import Image from 'next/image'
-import { Accommodation } from '../interfaces/becomehost/accommodation';
-import styles from '../styles/Home.module.css'
-import MainPagePreviewItem from '../components/main/preview';
 import { useEffect, useState } from 'react';
+import {addDays, isEqual} from "date-fns"
+
+import { Accommodation } from '../interfaces/becomehost/accommodation';
+import MainPagePreviewItem from '../components/main/preview';
 import { DirAmenity } from '../lib/models/dirAmenities';
 import { useDirAmenityDispatch } from '../contexts/amenities';
 import { HeaderContext, NavContext } from '../components/layout/layout1';
@@ -27,7 +25,6 @@ export default function Home({items,dirAmenity}:InferGetServerSidePropsType<type
   let amenit : any[] = [];
   items.forEach(one=>{
     if(one.register){
-        
       if(one.amenities?.convenient.includes(navCtx?.ame?.amenitiy as string)){
         amenit.push(one._id)
       }else if(one.amenities?.safeItem.includes(navCtx?.ame?.amenitiy as string)){
@@ -45,22 +42,43 @@ export default function Home({items,dirAmenity}:InferGetServerSidePropsType<type
 
   return (
     <Box sx={{display:"flex", flexWrap : "wrap", flexDirection :"row", padding : "24px", gap : "10px"}}>
-      <Button onClick={async()=>{
+      {/* <Button onClick={async()=>{
         const rcv = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/api/accommodation/list`,{method:"get"})
         const data = await rcv.json();
         console.log(data)
       }}>
         test
-      </Button>
+      </Button> */}
 
       { 
         items.map(one=>{
           if(amenit.includes(one._id)){
-            return (
-              <Box key={`${one._id}`}>
-                <MainPagePreviewItem item={one}/>
-              </Box>
-            )
+            let isDate = true;
+            if(!isEqual(headerCtx?.date[0] as any, headerCtx?.date[1] as any)){
+              const a= one.books.sort((a,b)=>{
+                return (new Date(a.checkinDate).valueOf() - new Date(b.checkinDate).valueOf())
+              })
+              // 검색한 날짜의 안에 예약된 룸은 제외하고, 검색한 날짜의 체크인 날짜가 book 체크하던 중에 체크아웃 날짜가 초과가 된다면 더이상 체크할 필요 없으므로 정지
+              for(let i = 0 ; i<a.length;i++){
+                if((new Date(a[i].checkinDate) <= new Date(headerCtx?.date[0] as any) && new Date(a[i].checkoutDate) >= new Date(headerCtx?.date[0] as any)) ||
+                (new Date(a[i].checkinDate) <= new Date(headerCtx?.date[1] as any) && new Date(a[i].checkoutDate) >= new Date(headerCtx?.date[1] as any))
+                ){
+                  isDate=false;
+                }
+                if(new Date(addDays(headerCtx?.date[0] as any,30)) < new Date(a[i].checkinDate)){
+                  break;
+                }
+              }
+            }
+
+            if(isDate){
+              // console.log("items",one._id,one.books,isDate);
+              return (
+                <Box key={`${one._id}`}>
+                  <MainPagePreviewItem item={one}/>
+                </Box>
+              )
+            }
           }
         })
       }

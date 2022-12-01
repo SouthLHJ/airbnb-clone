@@ -1,5 +1,6 @@
 import { NextApiHandler } from "next";
 import { Accommodation } from "../../../interfaces/becomehost/accommodation";
+import book from "../../../lib/models/book";
 import accommodations from "../../../lib/models/accommodations";
 import dbConnect from "../../../lib/models/connect";
 
@@ -9,8 +10,7 @@ const handler : NextApiHandler = async(req,res)=>{
 
     if(req.method === "GET"){
         try{
-            const rcv = await accommodations.find({}).populate("book").lean();
-            console.log("??",rcv)
+            const rcv = await accommodations.find({}).populate({path : "books", match : { checkoutDate : {$gte: new Date()} }}).lean();
             return res.status(200).json({result : true, datas: rcv})
         }catch(e:any){
             return res.status(422).json({result : false, error: e.message})

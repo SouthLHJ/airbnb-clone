@@ -1,7 +1,7 @@
 import { Box,Typography, Container, IconButton, Menu ,MenuItem ,Avatar ,Divider ,ListItemIcon, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText, TextField, Slide, Button } from "@mui/material";
 import { CustomColor } from "../../interfaces/setting/color";
 import {IoSearchCircle} from "react-icons/io5"
-import {useState,useContext} from "react"
+import {useState,useContext,useRef, MutableRefObject} from "react"
 import RoomAboutCalender from "../rooms/detail/about/calender";
 
 import { styled } from '@mui/material/styles';
@@ -18,8 +18,8 @@ import { ko } from "date-fns/locale";
 import { HeaderContext } from "../layout/layout1";
 
 function HeaderMiddle() {
-    const headerCtx = useContext(HeaderContext)
-    console.log(headerCtx?.detail)
+    const headerCtx = useContext(HeaderContext);
+    const saveRef = useRef<DateRange<typeof import("date-fns")>>();
     return (
     <>
         <Box
@@ -27,7 +27,7 @@ function HeaderMiddle() {
                 headerCtx?.setDetail(d=>!d)
             }}
             sx={[
-                {display :"flex", flexDirection :"row", borderStyle : "solid", borderColor : CustomColor.blackHover, borderWidth: 1, borderRadius : 10, pt: 1, pb : 1, pl : 2, pr:2, justifyContent : "space-around", position : "relative",},
+                {display :"flex", flexDirection :"row", borderStyle : "solid", borderColor : CustomColor.blackHover, borderWidth: 1, borderRadius : 10, pt: 1, pb : 1, pl : 2, pr:2, justifyContent : "space-around", position : "relative", height : "55px"},
                 {"&:hover":{boxShadow : 1}}
             ]}
             
@@ -36,7 +36,7 @@ function HeaderMiddle() {
                 headerCtx?.detail ?
                 <>
                     <Box sx={{width : "28%",display :"flex", flexDirection :"row",alignItems : "center", justifyContent: "center"}}>
-                        <Typography fontSize={13} fontWeight={"bold"}>여행지</Typography>
+                        {/* <Typography fontSize={13} fontWeight={"bold"}>여행지</Typography> */}
                     </Box>
                     <Box sx={{width : "30%",display :"flex", flexDirection :"column",alignItems : "center", justifyContent: "center"}}>
                         <Typography fontSize={13} fontWeight={"bold"}>체크인</Typography>
@@ -49,14 +49,23 @@ function HeaderMiddle() {
                     <Box sx={{width : "28%",display :"flex", flexDirection :"row",alignItems : "center", justifyContent: "center"}}>
                         <Typography fontSize={13}>여행자</Typography>
                     </Box>
-                    <Box sx={{width : "20%",display :"flex", flexDirection :"row",alignItems : "center", justifyContent: "center"}}>
+                    <Box sx={{width : "20%",display :"flex", flexDirection :"row",alignItems : "center", justifyContent: "center"}}
+                        onClick = {(evt)=>{
+                            evt.stopPropagation();
+                            if(!saveRef.current){
+                                return
+                            }
+                            headerCtx.setDate([new Date(saveRef.current[0] as any), new Date(saveRef.current[1] as any)])
+                            // console.log(saveRef.current)
+                        }}
+                    >
                         <IoSearchCircle fontSize={25} color={CustomColor.main}/>
                     </Box>
 
                     <Box sx={{position : "absolute", top : 55, borderWidth : "0.1px", borderStyle: "solid", borderColor : CustomColor.whiteHover, borderRadius  : "14px", overflow : "hidden"}}
                         onClick={(evt)=>evt.stopPropagation()}
                     >
-                        <Calender/>
+                        <Calender saveRef={saveRef}/>
                     </Box>
                     <Box
                     onClick={()=>{}}
@@ -99,10 +108,11 @@ function HeaderMiddle() {
 
 export default HeaderMiddle;
 
-const Calender = ()=>{
+const Calender = ({saveRef} : {saveRef: MutableRefObject<DateRange<typeof dateFns> | undefined> })=>{
     const headerCtx = useContext(HeaderContext);
     const date = headerCtx?.date;
     const setDate = headerCtx?.setDate;
+    const [dd, setdd] = useState<DateRange<typeof dateFns>>([date![0] as any, date![1] as any]);
 
     const renderWeekPickerDay = (date: dateFns,dateRangePickerDayProps: DateRangePickerDayProps<dateFns>) => {
         return <DateRangePickerDay {...dateRangePickerDayProps} />;
@@ -117,10 +127,13 @@ const Calender = ()=>{
                 calendars={2}
                 displayStaticWrapperAs="desktop"
                 label="date range"
-                value={date as any}
+                value={dd}
                 // minDate={5}
                 inputFormat={"yyyy-MM-dd"}
-                onChange={(newValue) => {headerCtx?.setDate(newValue as any)}}
+                onChange={(newValue) => {
+                    saveRef.current = newValue;
+                    setdd(newValue);
+                }}
                 renderDay={renderWeekPickerDay}
                 renderInput={(startProps, endProps) =>{
                     return (

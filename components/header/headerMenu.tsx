@@ -62,12 +62,12 @@ export default function HeaderMenu({ anchor, popup, offPopupIcon, onRegisterAcco
 
 
 
-                        <MenuItem onClick={() => { }} sx={{ fontWeight: "bold" }}>
+                        {/* <MenuItem onClick={() => { }} sx={{ fontWeight: "bold" }}>
                             메세지
                         </MenuItem>
                         <MenuItem onClick={() => { }} sx={{ fontWeight: "bold" }}>
                             알림
-                        </MenuItem>
+                        </MenuItem> */}
                         <MenuItem onClick={() => {router.push(`${process.env.NEXT_PUBLIC_SERVER_URI}/trip`) ; loading?.ready();}} sx={{ fontWeight: "bold" }}>
                             여행
                         </MenuItem>
@@ -78,16 +78,16 @@ export default function HeaderMenu({ anchor, popup, offPopupIcon, onRegisterAcco
                         <MenuItem onClick={()=>{router.push("/become-a-host")}}>
                             숙소 호스트 되기
                         </MenuItem>
-                        <MenuItem>
+                        {/* <MenuItem>
                             체험 호스팅 하기
-                        </MenuItem>
+                        </MenuItem> */}
                         <MenuItem>
                             계정
                         </MenuItem>
                         <Divider />
-                        <MenuItem>
+                        {/* <MenuItem>
                             도움말
-                        </MenuItem>
+                        </MenuItem> */}
                         <MenuItem onClick={()=>{signOut();dispatch({type :"remove"}) ; }}>
                             로그아웃
                         </MenuItem>

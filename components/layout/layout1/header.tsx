@@ -66,8 +66,8 @@ export default function Header (){
         <>  
             <AccountProvider>
 
-            <Box sx={{display : "flex" , flexDirection : "row", width  :"100vw", alignItems :"center",backgroundColor : "white"}}>
-                <Box sx={{width : "35%"}}>
+            <Box sx={{display : "flex" , flexDirection : "row", alignItems :"center",backgroundColor : "white"}}>
+                <Box flex={1}>
                     <IconButton sx={{color : CustomColor.main}}>
                     <SiAirbnb />
                     </IconButton>
@@ -75,7 +75,7 @@ export default function Header (){
                 <Box sx={{minWidth : "620px", textAlign : "center"}}>
                     <HeaderMiddle/>
                 </Box>
-                <Box  sx={{width : "35%", textAlign : "right"}}>
+                <Box flex={1} sx={{textAlign : "right"}}>
                     <IconButton
                         onClick={(evt)=>onPopupIcon(evt)}
                         aria-controls={popup ? 'account-menu' : undefined}

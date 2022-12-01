@@ -26,14 +26,15 @@ function MainLayout({children} : {children:ReactNode}) {
 
 
         <DirAmenityProvider>
-        <AppBar position="sticky" sx={{ top: 0, bottom: 'auto', boxShadow :0, bgcolor:'white', color: 'text.primary' ,zIndex :1200,    }}>
+        <AppBar position="sticky" sx={{ top: 0, bottom: 'auto', boxShadow :0, bgcolor:'white', color: 'text.primary' ,zIndex :1200, }}>
             <header>
-            <Toolbar>
+            <Box sx={{pt : "10px", bgcolor : "white", pl : "26px", pr : "26px"}}>
                 <Header />
-            </Toolbar>
+            </Box>
+
             </header>
         </AppBar>
-        <AppBar position="sticky" sx={{ top: 70, bottom: 'auto', boxShadow :0, bgcolor:'white', color: 'text.primary' }}>
+        <AppBar position="sticky" sx={{ top: 80, bottom: 'auto', boxShadow :0, bgcolor:'white', color: 'text.primary' }}>
             <nav>
         
             <Toolbar>
