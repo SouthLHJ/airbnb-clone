@@ -60,6 +60,7 @@ function HeaderMiddle() {
                                 return
                             }
                             headerCtx.setDate([new Date(saveRef.current[0] as any), new Date(saveRef.current[1] as any)])
+                            headerCtx.setDetail(false)
                             // console.log(saveRef.current)
                         }}
                     >
