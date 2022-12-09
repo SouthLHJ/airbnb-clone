@@ -130,5 +130,8 @@ const CustomDialog = styled(Dialog)(({ theme }) => ({
     },
     '& .css-1t1j96h-MuiPaper-root-MuiDialog-paper' :{
         maxWidth : "1000px"
-    }
+    },
+    '.css-uhb5lp':{
+        maxWidth : "1000px"
+    },
 }));
