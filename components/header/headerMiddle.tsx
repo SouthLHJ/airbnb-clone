@@ -13,13 +13,17 @@ import {
   DateRangePickerDayProps,
 } from '@mui/x-date-pickers-pro/DateRangePickerDay';
 import { DateRange } from '@mui/x-date-pickers-pro/DateRangePicker';
-import  dateFns,{differenceInDays,getYear,getMonth,getDate,format, addDays}  from 'date-fns';
+import  dateFns,{differenceInDays,getYear,getMonth,getDate,format, addDays, isEqual}  from 'date-fns';
 import { ko } from "date-fns/locale";
 import { HeaderContext } from "../layout/layout1";
 
 function HeaderMiddle() {
     const headerCtx = useContext(HeaderContext);
     const saveRef = useRef<DateRange<typeof import("date-fns")>>();
+    if(!headerCtx){
+        return null
+    }
+
     return (
     <>
         <Box
@@ -33,7 +37,7 @@ function HeaderMiddle() {
             
         >
             {
-                headerCtx?.detail ?
+                headerCtx?.detail || !isEqual(headerCtx?.date[0] as any,headerCtx?.date[1] as any) ?
                 <>
                     <Box sx={{width : "28%",display :"flex", flexDirection :"row",alignItems : "center", justifyContent: "center"}}>
                         {/* <Typography fontSize={13} fontWeight={"bold"}>여행지</Typography> */}
