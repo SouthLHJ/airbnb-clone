@@ -37,7 +37,7 @@ function HeaderMiddle() {
             
         >
             {
-                headerCtx?.detail || !isEqual(headerCtx?.date[0] as any,headerCtx?.date[1] as any) ?
+                headerCtx?.detail?
                 <>
                     <Box sx={{width : "28%",display :"flex", flexDirection :"row",alignItems : "center", justifyContent: "center"}}>
                         {/* <Typography fontSize={13} fontWeight={"bold"}>여행지</Typography> */}
@@ -90,9 +90,17 @@ function HeaderMiddle() {
                     <Box sx={{width : "28%",display :"flex", flexDirection :"row",alignItems : "center", justifyContent: "center"}}>
                         <Typography fontSize={13} fontWeight={"bold"}>어디든지</Typography>
                     </Box>
+
+                    {
+                        !isEqual(headerCtx?.date[0] as any,headerCtx?.date[1] as any) ?
+                    <Box sx={{width : "30%",display :"flex", flexDirection :"row",alignItems : "center", justifyContent: "center"}}>
+                        <Typography fontSize={13} fontWeight={"bold"}>{format(new Date(headerCtx.date[0] as any),"MM월 dd일")}~{format(new Date(headerCtx.date[1] as any),"MM월 dd일")}</Typography>
+                    </Box>
+                    :
                     <Box sx={{width : "30%",display :"flex", flexDirection :"row",alignItems : "center", justifyContent: "center"}}>
                         <Typography fontSize={13} fontWeight={"bold"}>언제든 일주일</Typography>
                     </Box>
+                    }
                     <Box sx={{width : "28%",display :"flex", flexDirection :"row",alignItems : "center", justifyContent: "center"}}>
                         <Typography fontSize={13}>게스트 추가</Typography>
                     </Box>
